@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/VSCod/Kursach/pugixml-1.15/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
