@@ -150,11 +150,11 @@ class BasicFB{
         }
 };
 
-class PNG_image{
-    
-};
+BasicFB* create_basic_fb(const char* xml_file_address) {
+    // Просто создаем объект BasicFB и возвращаем указатель
+    return new BasicFB(xml_file_address);
+}
 
-int main(){
-    BasicFB a("test_data_xml//ADD_2.xml");
-    a.get_main_attributes();
+void get_name(BasicFB *a){
+    a->get_main_attributes();
 }
