@@ -1,6 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/main.dir/pugixml-1.15/src/pugixml.cpp.obj"
-  "CMakeFiles/main.dir/pugixml-1.15/src/pugixml.cpp.obj.d"
   "CMakeFiles/main.dir/src/FB_lib.cpp.obj"
   "CMakeFiles/main.dir/src/FB_lib.cpp.obj.d"
   "CMakeFiles/main.dir/src/main.cpp.obj"

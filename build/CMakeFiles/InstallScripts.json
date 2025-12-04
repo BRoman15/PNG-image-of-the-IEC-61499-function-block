@@ -2,6 +2,7 @@
 	"InstallScripts" : 
 	[
 		"C:/VSCod/PNG-image-of-the-IEC-61499-function-block/build/cmake_install.cmake",
+		"C:/VSCod/PNG-image-of-the-IEC-61499-function-block/build/_deps/pugixml-build/cmake_install.cmake",
 		"C:/VSCod/PNG-image-of-the-IEC-61499-function-block/build/_deps/sfml-build/cmake_install.cmake",
 		"C:/VSCod/PNG-image-of-the-IEC-61499-function-block/build/_deps/sfml-build/src/SFML/cmake_install.cmake",
 		"C:/VSCod/PNG-image-of-the-IEC-61499-function-block/build/_deps/sfml-build/src/SFML/System/cmake_install.cmake",

@@ -161,8 +161,8 @@ CMakeFiles/main.dir/src/FB_lib.cpp.obj: \
  C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include/c++/bits/ostream.tcc \
  C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include/c++/bits/istream.tcc \
  C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include/c++/bits/sstream.tcc \
- C:\VSCod\PNG-image-of-the-IEC-61499-function-block\pugixml-1.15\src\pugixml.hpp \
- C:\VSCod\PNG-image-of-the-IEC-61499-function-block\pugixml-1.15\src\pugiconfig.hpp \
+ C:/VSCod/PNG-image-of-the-IEC-61499-function-block/build/_deps/pugixml-src/src/pugixml.hpp \
+ C:/VSCod/PNG-image-of-the-IEC-61499-function-block/build/_deps/pugixml-src/src/pugiconfig.hpp \
  C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include/c++/iterator \
  C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include/c++/bits/stream_iterator.h \
  C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include/c++/iostream \

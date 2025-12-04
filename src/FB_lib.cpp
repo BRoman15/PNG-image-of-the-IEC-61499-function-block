@@ -1,5 +1,5 @@
 #include "C:\VSCod\PNG-image-of-the-IEC-61499-function-block\include\FB_lib.h"
-#include "C:\VSCod\PNG-image-of-the-IEC-61499-function-block\pugixml-1.15\src\pugixml.hpp"
+#include "pugixml.hpp"
 #include <iostream>
 #include <iomanip>
 #include <fstream>

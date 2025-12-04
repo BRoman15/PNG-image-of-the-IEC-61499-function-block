@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/VSCod/PNG-image-of-the-IEC-61499-function-block/build/_deps/pugixml-subbuild/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

@@ -1,7 +1,0 @@
-C:/VSCod/Kursach/pugixml-1.15/build/CMakeFiles/pugixml-static.dir
-C:/VSCod/Kursach/pugixml-1.15/build/CMakeFiles/edit_cache.dir
-C:/VSCod/Kursach/pugixml-1.15/build/CMakeFiles/rebuild_cache.dir
-C:/VSCod/Kursach/pugixml-1.15/build/CMakeFiles/list_install_components.dir
-C:/VSCod/Kursach/pugixml-1.15/build/CMakeFiles/install.dir
-C:/VSCod/Kursach/pugixml-1.15/build/CMakeFiles/install/local.dir
-C:/VSCod/Kursach/pugixml-1.15/build/CMakeFiles/install/strip.dir

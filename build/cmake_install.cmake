@@ -39,6 +39,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
+  include("C:/VSCod/PNG-image-of-the-IEC-61499-function-block/build/_deps/pugixml-build/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
   include("C:/VSCod/PNG-image-of-the-IEC-61499-function-block/build/_deps/sfml-build/cmake_install.cmake")
 endif()
 
