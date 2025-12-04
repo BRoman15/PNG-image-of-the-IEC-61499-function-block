@@ -245,29 +245,77 @@ sfml-graphics/fast:
 	$(MAKE) $(MAKESILENT) -f _deps\sfml-build\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\build.make _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/build
 .PHONY : sfml-graphics/fast
 
-main.obj: main.cpp.obj
-.PHONY : main.obj
+pugixml-1.15/src/pugixml.obj: pugixml-1.15/src/pugixml.cpp.obj
+.PHONY : pugixml-1.15/src/pugixml.obj
 
 # target to build an object file
-main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/main.cpp.obj
-.PHONY : main.cpp.obj
+pugixml-1.15/src/pugixml.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/pugixml-1.15/src/pugixml.cpp.obj
+.PHONY : pugixml-1.15/src/pugixml.cpp.obj
 
-main.i: main.cpp.i
-.PHONY : main.i
+pugixml-1.15/src/pugixml.i: pugixml-1.15/src/pugixml.cpp.i
+.PHONY : pugixml-1.15/src/pugixml.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/main.cpp.i
-.PHONY : main.cpp.i
+pugixml-1.15/src/pugixml.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/pugixml-1.15/src/pugixml.cpp.i
+.PHONY : pugixml-1.15/src/pugixml.cpp.i
 
-main.s: main.cpp.s
-.PHONY : main.s
+pugixml-1.15/src/pugixml.s: pugixml-1.15/src/pugixml.cpp.s
+.PHONY : pugixml-1.15/src/pugixml.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/main.cpp.s
-.PHONY : main.cpp.s
+pugixml-1.15/src/pugixml.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/pugixml-1.15/src/pugixml.cpp.s
+.PHONY : pugixml-1.15/src/pugixml.cpp.s
+
+src/FB_lib.obj: src/FB_lib.cpp.obj
+.PHONY : src/FB_lib.obj
+
+# target to build an object file
+src/FB_lib.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/FB_lib.cpp.obj
+.PHONY : src/FB_lib.cpp.obj
+
+src/FB_lib.i: src/FB_lib.cpp.i
+.PHONY : src/FB_lib.i
+
+# target to preprocess a source file
+src/FB_lib.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/FB_lib.cpp.i
+.PHONY : src/FB_lib.cpp.i
+
+src/FB_lib.s: src/FB_lib.cpp.s
+.PHONY : src/FB_lib.s
+
+# target to generate assembly for a file
+src/FB_lib.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/FB_lib.cpp.s
+.PHONY : src/FB_lib.cpp.s
+
+src/main.obj: src/main.cpp.obj
+.PHONY : src/main.obj
+
+# target to build an object file
+src/main.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/main.cpp.obj
+.PHONY : src/main.cpp.obj
+
+src/main.i: src/main.cpp.i
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 # Help Target
 help:
@@ -288,9 +336,15 @@ help:
 	@echo ... sfml-main
 	@echo ... sfml-system
 	@echo ... sfml-window
-	@echo ... main.obj
-	@echo ... main.i
-	@echo ... main.s
+	@echo ... pugixml-1.15/src/pugixml.obj
+	@echo ... pugixml-1.15/src/pugixml.i
+	@echo ... pugixml-1.15/src/pugixml.s
+	@echo ... src/FB_lib.obj
+	@echo ... src/FB_lib.i
+	@echo ... src/FB_lib.s
+	@echo ... src/main.obj
+	@echo ... src/main.i
+	@echo ... src/main.s
 .PHONY : help
 
 

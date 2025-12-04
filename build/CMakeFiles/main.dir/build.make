@@ -71,29 +71,63 @@ include CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/codegen:
 .PHONY : CMakeFiles/main.dir/codegen
 
-CMakeFiles/main.dir/main.cpp.obj: CMakeFiles/main.dir/flags.make
-CMakeFiles/main.dir/main.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
-CMakeFiles/main.dir/main.cpp.obj: C:/VSCod/PNG-image-of-the-IEC-61499-function-block/main.cpp
-CMakeFiles/main.dir/main.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\VSCod\PNG-image-of-the-IEC-61499-function-block\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/main.cpp.obj"
-	C:\TDM-GCC-64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/main.cpp.obj -MF CMakeFiles\main.dir\main.cpp.obj.d -o CMakeFiles\main.dir\main.cpp.obj -c C:\VSCod\PNG-image-of-the-IEC-61499-function-block\main.cpp
+CMakeFiles/main.dir/src/main.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/main.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/src/main.cpp.obj: C:/VSCod/PNG-image-of-the-IEC-61499-function-block/src/main.cpp
+CMakeFiles/main.dir/src/main.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\VSCod\PNG-image-of-the-IEC-61499-function-block\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/src/main.cpp.obj"
+	C:\TDM-GCC-64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/main.cpp.obj -MF CMakeFiles\main.dir\src\main.cpp.obj.d -o CMakeFiles\main.dir\src\main.cpp.obj -c C:\VSCod\PNG-image-of-the-IEC-61499-function-block\src\main.cpp
 
-CMakeFiles/main.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/main.cpp.i"
-	C:\TDM-GCC-64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\VSCod\PNG-image-of-the-IEC-61499-function-block\main.cpp > CMakeFiles\main.dir\main.cpp.i
+CMakeFiles/main.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/src/main.cpp.i"
+	C:\TDM-GCC-64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\VSCod\PNG-image-of-the-IEC-61499-function-block\src\main.cpp > CMakeFiles\main.dir\src\main.cpp.i
 
-CMakeFiles/main.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/main.cpp.s"
-	C:\TDM-GCC-64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\VSCod\PNG-image-of-the-IEC-61499-function-block\main.cpp -o CMakeFiles\main.dir\main.cpp.s
+CMakeFiles/main.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/main.cpp.s"
+	C:\TDM-GCC-64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\VSCod\PNG-image-of-the-IEC-61499-function-block\src\main.cpp -o CMakeFiles\main.dir\src\main.cpp.s
+
+CMakeFiles/main.dir/src/FB_lib.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/FB_lib.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/src/FB_lib.cpp.obj: C:/VSCod/PNG-image-of-the-IEC-61499-function-block/src/FB_lib.cpp
+CMakeFiles/main.dir/src/FB_lib.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\VSCod\PNG-image-of-the-IEC-61499-function-block\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main.dir/src/FB_lib.cpp.obj"
+	C:\TDM-GCC-64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/FB_lib.cpp.obj -MF CMakeFiles\main.dir\src\FB_lib.cpp.obj.d -o CMakeFiles\main.dir\src\FB_lib.cpp.obj -c C:\VSCod\PNG-image-of-the-IEC-61499-function-block\src\FB_lib.cpp
+
+CMakeFiles/main.dir/src/FB_lib.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/src/FB_lib.cpp.i"
+	C:\TDM-GCC-64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\VSCod\PNG-image-of-the-IEC-61499-function-block\src\FB_lib.cpp > CMakeFiles\main.dir\src\FB_lib.cpp.i
+
+CMakeFiles/main.dir/src/FB_lib.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/FB_lib.cpp.s"
+	C:\TDM-GCC-64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\VSCod\PNG-image-of-the-IEC-61499-function-block\src\FB_lib.cpp -o CMakeFiles\main.dir\src\FB_lib.cpp.s
+
+CMakeFiles/main.dir/pugixml-1.15/src/pugixml.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/pugixml-1.15/src/pugixml.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/pugixml-1.15/src/pugixml.cpp.obj: C:/VSCod/PNG-image-of-the-IEC-61499-function-block/pugixml-1.15/src/pugixml.cpp
+CMakeFiles/main.dir/pugixml-1.15/src/pugixml.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\VSCod\PNG-image-of-the-IEC-61499-function-block\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/main.dir/pugixml-1.15/src/pugixml.cpp.obj"
+	C:\TDM-GCC-64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/pugixml-1.15/src/pugixml.cpp.obj -MF CMakeFiles\main.dir\pugixml-1.15\src\pugixml.cpp.obj.d -o CMakeFiles\main.dir\pugixml-1.15\src\pugixml.cpp.obj -c C:\VSCod\PNG-image-of-the-IEC-61499-function-block\pugixml-1.15\src\pugixml.cpp
+
+CMakeFiles/main.dir/pugixml-1.15/src/pugixml.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/pugixml-1.15/src/pugixml.cpp.i"
+	C:\TDM-GCC-64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\VSCod\PNG-image-of-the-IEC-61499-function-block\pugixml-1.15\src\pugixml.cpp > CMakeFiles\main.dir\pugixml-1.15\src\pugixml.cpp.i
+
+CMakeFiles/main.dir/pugixml-1.15/src/pugixml.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/pugixml-1.15/src/pugixml.cpp.s"
+	C:\TDM-GCC-64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\VSCod\PNG-image-of-the-IEC-61499-function-block\pugixml-1.15\src\pugixml.cpp -o CMakeFiles\main.dir\pugixml-1.15\src\pugixml.cpp.s
 
 # Object files for target main
 main_OBJECTS = \
-"CMakeFiles/main.dir/main.cpp.obj"
+"CMakeFiles/main.dir/src/main.cpp.obj" \
+"CMakeFiles/main.dir/src/FB_lib.cpp.obj" \
+"CMakeFiles/main.dir/pugixml-1.15/src/pugixml.cpp.obj"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
 
-main.exe: CMakeFiles/main.dir/main.cpp.obj
+main.exe: CMakeFiles/main.dir/src/main.cpp.obj
+main.exe: CMakeFiles/main.dir/src/FB_lib.cpp.obj
+main.exe: CMakeFiles/main.dir/pugixml-1.15/src/pugixml.cpp.obj
 main.exe: CMakeFiles/main.dir/build.make
 main.exe: _deps/sfml-build/lib/libsfml-graphics.a
 main.exe: _deps/sfml-build/lib/libsfml-window.a
@@ -102,7 +136,7 @@ main.exe: _deps/sfml-src/extlibs/libs-mingw/x64/libfreetype.a
 main.exe: CMakeFiles/main.dir/linkLibs.rsp
 main.exe: CMakeFiles/main.dir/objects1.rsp
 main.exe: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\VSCod\PNG-image-of-the-IEC-61499-function-block\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable main.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\VSCod\PNG-image-of-the-IEC-61499-function-block\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable main.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\main.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
