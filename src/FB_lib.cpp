@@ -24,8 +24,6 @@ void BasicFB::get_attributes(){
         pugi::xml_node node = xpath_node.node();
         name_FB = node.attribute("Name").as_string();
     }
-    cout << name_FB;
-
 
     //Get the attributes of the subnodes of node EventInputs
     pugi::xpath_node_set elements_input = doc.select_nodes("//EventInputs//Event");           
@@ -112,7 +110,19 @@ void BasicFB::get_attributes(){
         }
         outputVars_attrebutes.push_back(vardeclaration_output);
     }
+
+
 }
+
+int BasicFB::get_count_event(){
+    return eventInputs_attrebutes.size();
+}
+
+int BasicFB::get_count_vars(){
+    return inputVars_attrebutes.size();
+}
+
+
 
 BasicFB* create_basic_fb(const char* xml_file_address) {
     // Просто создаем объект BasicFB и возвращаем указатель

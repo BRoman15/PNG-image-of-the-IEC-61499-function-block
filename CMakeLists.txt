@@ -32,8 +32,14 @@ set(SFML_BUILD_DOC OFF CACHE BOOL "" FORCE)
 # Загружаем библиотеки
 FetchContent_MakeAvailable(pugixml sfml)
 
+include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${pugixml_SOURCE_DIR}/src
+    ${sfml_SOURCE_DIR}/include
+)
+
 # Создаем исполняемый файл
-add_executable(main src/main.cpp src/FB_lib.cpp)
+add_executable(main src/main.cpp src/FB_lib.cpp src/FB_lib_graphic.cpp)
 
 # Подключаем библиотеки
 target_link_libraries(main PRIVATE

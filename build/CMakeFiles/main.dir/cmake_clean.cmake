@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/main.dir/src/FB_lib.cpp.obj"
   "CMakeFiles/main.dir/src/FB_lib.cpp.obj.d"
+  "CMakeFiles/main.dir/src/FB_lib_graphic.cpp.obj"
+  "CMakeFiles/main.dir/src/FB_lib_graphic.cpp.obj.d"
   "CMakeFiles/main.dir/src/main.cpp.obj"
   "CMakeFiles/main.dir/src/main.cpp.obj.d"
   "libmain.dll.a"

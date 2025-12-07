@@ -24,17 +24,20 @@ struct OutputVars : public InputVars{};
 
 class BasicFB{
 
-        const char * xml_file_address;
+    const char * xml_file_address;
+
+
+    public:
         vector<EventInputs>  eventInputs_attrebutes;
         vector<EventOutputs>  eventOutputs_attrebutes;
         vector<InputVars> inputVars_attrebutes;
         vector<OutputVars> outputVars_attrebutes;
         string name_FB;
     
-
-    public:
         BasicFB(const char * xml_file_address_);
         void get_attributes();
+        int get_count_event();
+        int get_count_vars();
 };
 
 

@@ -646,6 +646,30 @@ src/FB_lib.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/FB_lib.cpp.s
 .PHONY : src/FB_lib.cpp.s
 
+src/FB_lib_graphic.obj: src/FB_lib_graphic.cpp.obj
+.PHONY : src/FB_lib_graphic.obj
+
+# target to build an object file
+src/FB_lib_graphic.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/FB_lib_graphic.cpp.obj
+.PHONY : src/FB_lib_graphic.cpp.obj
+
+src/FB_lib_graphic.i: src/FB_lib_graphic.cpp.i
+.PHONY : src/FB_lib_graphic.i
+
+# target to preprocess a source file
+src/FB_lib_graphic.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/FB_lib_graphic.cpp.i
+.PHONY : src/FB_lib_graphic.cpp.i
+
+src/FB_lib_graphic.s: src/FB_lib_graphic.cpp.s
+.PHONY : src/FB_lib_graphic.s
+
+# target to generate assembly for a file
+src/FB_lib_graphic.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/FB_lib_graphic.cpp.s
+.PHONY : src/FB_lib_graphic.cpp.s
+
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -721,6 +745,9 @@ help:
 	@echo ... src/FB_lib.obj
 	@echo ... src/FB_lib.i
 	@echo ... src/FB_lib.s
+	@echo ... src/FB_lib_graphic.obj
+	@echo ... src/FB_lib_graphic.i
+	@echo ... src/FB_lib_graphic.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
