@@ -11,7 +11,10 @@
 
 int main(){
     BasicFB_image a;
-    a.addTransparentBeveledRectangle(400, 300, 200, 100, 20);
+    a.addTransparentBeveledRectangle(400, 300, 200, 200, 100, 20);
+    a.addText("Normal Execution Request", 400, 300);
+    a.addTriangle(370, 300);
+    a.addLine(30, 30, 100, 1);
     while (a.isWindowOpen()) {
         a.update();
     }

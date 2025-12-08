@@ -55,6 +55,10 @@ class BasicFB_image{
     sf::RenderTexture renderTexture;
     std::vector<std::function<void(sf::RenderTarget&)>> drawables;
     bool saveToPNG(const std::string& filename);
+    const int text_size = 20;
+    sf::Color text_color = sf::Color::Black;
+    std::unique_ptr<sf::Font> font;
+
 
     public:
         BasicFB_image();
@@ -63,5 +67,10 @@ class BasicFB_image{
         void update();
         void close();
         void addDrawable(std::function<void(sf::RenderTarget&)> drawFunc);
-        void addTransparentBeveledRectangle(float x, float y, float width, float height, float bevelSize, float outlineThickness = 1.0f);
+        void addTransparentBeveledRectangle(float x, float y, float width, float height_event, float height_vars, float bevelSize, float outlineThickness = 1.0f);
+        void addText(const std::string& text, float x, float y);
+        void addTriangle(float x, float y);
+        void addLine(float x, float y, float length);
+        void addLine(float x, float y, float length, const int a);
+
 };

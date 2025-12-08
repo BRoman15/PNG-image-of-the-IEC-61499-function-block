@@ -8,6 +8,30 @@ BasicFB_image::BasicFB_image() : window(sf::VideoMode(800, 600), "Save to PNG", 
     isOpen = true;
     renderTexture.create(800, 600);
     window.setFramerateLimit(60);
+
+    // Загрузка шрифта
+    font = std::make_unique<sf::Font>();
+    
+    // Пытаемся загрузить шрифт из разных мест
+    const char* fontPaths[] = {
+        "cour.ttf",                            // Текущая директория
+        "C:/Windows/Fonts/cour.ttf",           // Windows
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf", // Linux
+        nullptr
+    };
+    
+    bool fontLoaded = false;
+    for (int i = 0; fontPaths[i] != nullptr; i++) {
+        if (font->loadFromFile(fontPaths[i])) {
+            fontLoaded = true;
+            break;
+        }
+    }
+    
+    if (fontLoaded == false) {
+        std::cout << "ERROR: font is not loaded" << std::endl;
+        std::cout << "Place the arial.ttf file in the program folder" << std::endl;
+    }
 }
 
 BasicFB_image::~BasicFB_image() {
@@ -59,41 +83,104 @@ void BasicFB_image::close() {
 
 
 // Добавление объектов
-
 void BasicFB_image::addDrawable(std::function<void(sf::RenderTarget&)> drawFunc) {
     drawables.push_back(drawFunc);
 }
 
-// Прямоугольник со скошенными углами (фаской)
-void BasicFB_image::addTransparentBeveledRectangle(float x, float y, float width, float height, float bevelSize, float outlineThickness) {
+// Контур функционального блока
+void BasicFB_image::addTransparentBeveledRectangle(float x, float y, float width, float height_event, float height_vars, float bevelSize, float outlineThickness) {
     
     addDrawable([=](sf::RenderTarget& target) {
         // Проверяем и ограничиваем размер фаски
-        float safeBevel = bevelSize;
-        float maxBevel = std::min(width, height) / 2.0f;
+        float safeBevel = bevelSize / 2;
+        float maxBevel = std::min(width, height_vars) / 2.0f;
         if (bevelSize > maxBevel) {
             safeBevel = maxBevel;
         }
         
         // Создаем ConvexShape
         sf::ConvexShape shape;
-        shape.setPointCount(7);
+        shape.setPointCount(14);
         
-        // Устанавливаем точки для фаски
-        shape.setPoint(0, sf::Vector2f(x + safeBevel, y));
-        shape.setPoint(1, sf::Vector2f(x + width - safeBevel, y));
-        shape.setPoint(2, sf::Vector2f(x + width, y + safeBevel));
-        shape.setPoint(3, sf::Vector2f(x + width, y + height - safeBevel));
-        shape.setPoint(4, sf::Vector2f(x + width - safeBevel, y + height));
-        shape.setPoint(5, sf::Vector2f(x + safeBevel, y + height));
-        shape.setPoint(6, sf::Vector2f(x, y + height - safeBevel));
-        // shape.setPoint(7, sf::Vector2f(x, y + safeBevel));
-        
+        // Устанавливаем точки фигуры
+        shape.setPoint(0, sf::Vector2f(x + width - safeBevel, y));
+        shape.setPoint(1, sf::Vector2f(x + width, y + safeBevel));
+        shape.setPoint(2, sf::Vector2f(x + width, y + height_vars - safeBevel));
+        shape.setPoint(3, sf::Vector2f(x + width - safeBevel, y + height_vars));
+        shape.setPoint(4, sf::Vector2f(x + safeBevel, y + height_vars));
+        shape.setPoint(5, sf::Vector2f(x, y + height_vars - safeBevel));
+        shape.setPoint(6, sf::Vector2f(x, y + safeBevel));
+        shape.setPoint(7, sf::Vector2f(x + safeBevel, y));
+        shape.setPoint(8, sf::Vector2f(x, y - safeBevel));
+        shape.setPoint(9, sf::Vector2f(x, y + safeBevel - height_event));
+        shape.setPoint(10, sf::Vector2f(x + safeBevel, y - height_event));
+        shape.setPoint(11, sf::Vector2f(x - safeBevel + width, y - height_event));
+        shape.setPoint(12, sf::Vector2f(x + width, y - height_event + safeBevel));
+        shape.setPoint(13, sf::Vector2f(x + width, y - safeBevel));
+
+
+
         // ПРОЗРАЧНАЯ заливка, ЧЕРНЫЙ контур
         shape.setFillColor(sf::Color::Transparent);
         shape.setOutlineColor(sf::Color::Black);
         shape.setOutlineThickness(outlineThickness);
         
         target.draw(shape);
+    });
+}
+
+// Текст
+void BasicFB_image::addText(const std::string& text, float x, float y) {
+    drawables.push_back([this, text, x, y](sf::RenderTarget& target) {
+        sf::Text textObj(text, *font, text_size);
+        textObj.setPosition(x, y);
+        textObj.setFillColor(text_color);
+        target.draw(textObj);
+    });
+}
+
+// Треугольник
+void BasicFB_image::addTriangle(float x, float y){
+
+        addDrawable([=](sf::RenderTarget& target) {
+        // Создаем ConvexShape
+        sf::ConvexShape shape;
+        shape.setPointCount(3);
+
+        shape.setPoint(0, sf::Vector2f(x, y));
+        shape.setPoint(1, sf::Vector2f(x + (text_size * 0.866), y + text_size/2));
+        shape.setPoint(2, sf::Vector2f(x, y + text_size));
+
+        shape.setFillColor(sf::Color::Transparent);
+        shape.setOutlineColor(sf::Color::Black);
+        shape.setOutlineThickness(1.0f);
+        
+        target.draw(shape);
+    });
+}
+
+// Линия
+
+void BasicFB_image::addLine(float x, float y, float length){
+    addDrawable([=](sf::RenderTarget& target) {
+        sf::VertexArray line(sf::Lines, 2);
+        line[0].position = sf::Vector2f(x, y);
+        line[1].position = sf::Vector2f(x + length, y);
+
+        line[0].color = sf::Color::Black;
+        line[1].color = sf::Color::Black;
+        target.draw(line);
+    });
+}
+
+void BasicFB_image::addLine(float x, float y, float length, const int a){
+    addDrawable([=](sf::RenderTarget& target) {
+        sf::VertexArray line(sf::Lines, 2);
+        line[0].position = sf::Vector2f(x, y);
+        line[1].position = sf::Vector2f(x, y + length);
+
+        line[0].color = sf::Color::Black;
+        line[1].color = sf::Color::Black;
+        target.draw(line);
     });
 }
