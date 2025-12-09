@@ -7,8 +7,8 @@ class Connection{
     private:
         unique_ptr<BasicFB> FB;
         unique_ptr<BasicFB_image> image;
-        const int x_size_window = 800;
-        const int y_size_window = 600;
+        const int x_size_window = 1280;
+        const int y_size_window = 720;
     public:
         Connection();
         bool load_from_XML(const string& xmlFilePath);

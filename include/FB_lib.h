@@ -25,7 +25,8 @@ struct OutputVars : public InputVars{};
 class BasicFB{
 
     string xml_file_address;
-
+    int countEvent_InputWith_var = 0;
+    int countEvent_OutputsWith_var = 0;
 
     public:
         vector<EventInputs>  eventInputs_attrebutes;

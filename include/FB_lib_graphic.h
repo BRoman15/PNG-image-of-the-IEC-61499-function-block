@@ -16,6 +16,7 @@ class BasicFB_image{
 
 
     public:
+        const int size_square = 10;
         const int text_size = 20;
         BasicFB_image();
         ~BasicFB_image();

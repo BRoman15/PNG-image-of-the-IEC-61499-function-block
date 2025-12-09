@@ -46,6 +46,7 @@ void BasicFB::get_attributes(){
             }
         }
         if ((string)node.first_child().name() == "With"){
+            countEvent_InputWith_var += 1;
             for (pugi::xml_node node_with : node.children())
                 event_input.vars.push_back(node_with.first_attribute().as_string());                        
         }
@@ -69,6 +70,7 @@ void BasicFB::get_attributes(){
             }
         }
         if ((string)node.first_child().name() == "With"){
+            countEvent_OutputsWith_var += 1;
             for (pugi::xml_node node_with : node.children())
                 event_output.vars.push_back(node_with.first_attribute().as_string());                         
         }
@@ -131,21 +133,9 @@ const string BasicFB::get_name_FB(){
 }
 
 int BasicFB::get_countEvent_InputWith_var(){
-    int count = 0;
-    for(EventInputs a : eventInputs_attrebutes){
-        if (a.vars.empty() == false){
-            count += 1;
-        }
-    }
-    return count;
+    return countEvent_InputWith_var;
 }
 
 int BasicFB::get_countEvent_OutputsWith_var(){
-    int count = 0;
-    for(EventOutputs a : eventOutputs_attrebutes){
-        if (a.vars.empty() == false){
-            count += 1;
-        }
-    }
-    return count;
+    return countEvent_OutputsWith_var;
 }

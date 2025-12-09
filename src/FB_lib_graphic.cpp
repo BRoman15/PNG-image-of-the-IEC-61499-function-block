@@ -4,9 +4,9 @@
 #include <vector>
 #include "SFML\Graphics.hpp"
 
-BasicFB_image::BasicFB_image() : window(sf::VideoMode(800, 600), "Save to PNG", sf::Style::Default){
+BasicFB_image::BasicFB_image() : window(sf::VideoMode(1280, 720), "Save to PNG", sf::Style::Default){
     isOpen = true;
-    renderTexture.create(800, 600);
+    renderTexture.create(1280, 720);
     window.setFramerateLimit(60);
 
     // Загрузка шрифта
@@ -159,11 +159,11 @@ void BasicFB_image::addTriangle(float x, float y){
         shape.setPointCount(3);
 
         shape.setPoint(0, sf::Vector2f(x, y));
-        shape.setPoint(1, sf::Vector2f(x + (text_size * 0.866), y + text_size/2));
+        shape.setPoint(1, sf::Vector2f(x + (text_size * 0.5), y + text_size/2)); //0.866
         shape.setPoint(2, sf::Vector2f(x, y + text_size));
 
-        shape.setFillColor(sf::Color::Black); // Transparent
-        shape.setOutlineColor(sf::Color::Transparent);
+        shape.setFillColor(sf::Color::Green); // Transparent
+        shape.setOutlineColor(sf::Color::Black);
         shape.setOutlineThickness(1.0f);
         
         target.draw(shape);
@@ -201,7 +201,6 @@ void BasicFB_image::addConnection(float x, float y, float y_var){
         addDrawable([=](sf::RenderTarget& target) {
         // Создаем ConvexShape
         sf::ConvexShape shape;
-        const int size_square = 14;
         shape.setPointCount(4);
 
         shape.setPoint(0, sf::Vector2f(x - size_square/2, y - size_square/2));

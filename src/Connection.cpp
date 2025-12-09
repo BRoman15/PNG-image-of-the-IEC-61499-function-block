@@ -54,12 +54,32 @@ void Connection::rendering_FB(){
         y_FB - trunc((image->text_size)+10)/2);
     
     // добавление event in/out
-    // for(int i; i < FB -> eventInputs_attrebutes.size(); i++){
-    int top_margin = 20;
+    int top_margin = 25;
+    int coefficient_order_connections = 0;
     for (EventInputs event : FB->eventInputs_attrebutes){
-        image->addText(event.)
-    }
-    // }
+        image->addTriangle(x_FB, y_FB - height_event + top_margin);
+        image->addText(event.name, x_FB + image->text_size / 2 + 5, y_FB - height_event + top_margin - 5);
+        image->addLine(x_FB,
+            y_FB - height_event + top_margin + image->text_size/2,
+            -(10 + image->size_square * FB->get_countEvent_InputWith_var() + 10));
 
+        if (event.vars.empty() == false){
+            image->addConnection(x_FB - 10 - image->size_square, y_FB - height_event + top_margin + image->text_size/2, 1);
+        }
+        image->addText(event.type,
+            x_FB - (10 + image->size_square * FB->get_countEvent_InputWith_var() + 5) - image->get_width_text(event.type) -15,
+            y_FB - height_event + top_margin - 5);
+        
+        image->addLine(
+            x_FB - (10 + image->size_square * FB->get_countEvent_InputWith_var() + 5) - image->get_width_text(event.type) -35,
+            y_FB - height_event + top_margin + image->text_size/2,
+            5);
+        
+        image->addText(event.comment,
+            x_FB - (10 + image->size_square * FB->get_countEvent_InputWith_var() + 5) - image->get_width_text(event.type) -50 - image->get_width_text(event.comment),
+            y_FB - height_event + top_margin - 5);
+        top_margin += 30;
+    }
+ 
     image->update();
 }
