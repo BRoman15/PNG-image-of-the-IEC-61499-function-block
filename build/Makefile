@@ -622,6 +622,30 @@ sfml-graphics/fast:
 	$(MAKE) $(MAKESILENT) -f _deps\sfml-build\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\build.make _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/build
 .PHONY : sfml-graphics/fast
 
+src/Connection.obj: src/Connection.cpp.obj
+.PHONY : src/Connection.obj
+
+# target to build an object file
+src/Connection.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/Connection.cpp.obj
+.PHONY : src/Connection.cpp.obj
+
+src/Connection.i: src/Connection.cpp.i
+.PHONY : src/Connection.i
+
+# target to preprocess a source file
+src/Connection.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/Connection.cpp.i
+.PHONY : src/Connection.cpp.i
+
+src/Connection.s: src/Connection.cpp.s
+.PHONY : src/Connection.s
+
+# target to generate assembly for a file
+src/Connection.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/Connection.cpp.s
+.PHONY : src/Connection.cpp.s
+
 src/FB_lib.obj: src/FB_lib.cpp.obj
 .PHONY : src/FB_lib.obj
 
@@ -742,6 +766,9 @@ help:
 	@echo ... sfml-main
 	@echo ... sfml-system
 	@echo ... sfml-window
+	@echo ... src/Connection.obj
+	@echo ... src/Connection.i
+	@echo ... src/Connection.s
 	@echo ... src/FB_lib.obj
 	@echo ... src/FB_lib.i
 	@echo ... src/FB_lib.s

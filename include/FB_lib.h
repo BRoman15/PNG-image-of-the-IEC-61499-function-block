@@ -24,7 +24,7 @@ struct OutputVars : public InputVars{};
 
 class BasicFB{
 
-    const char * xml_file_address;
+    string xml_file_address;
 
 
     public:
@@ -35,11 +35,11 @@ class BasicFB{
         string name_FB;
     
         BasicFB(const char * xml_file_address_);
+        BasicFB(const std::string& xml_file_address_);
         void get_attributes();
         int get_count_event();
         int get_count_vars();
+        int get_countEvent_InputWith_var();
+        int get_countEvent_OutputsWith_var();
+        const string get_name_FB();
 };
-
-
-BasicFB* create_basic_fb(const char* xml_file_address);
-void get_name(BasicFB *a);

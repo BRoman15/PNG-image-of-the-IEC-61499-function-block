@@ -10,10 +10,14 @@ BasicFB::BasicFB(const char * xml_file_address_){
     xml_file_address = xml_file_address_;
 }
 
+BasicFB::BasicFB(const std::string& xml_file_address_)
+    : xml_file_address(xml_file_address_) {
+}
+
 
 void BasicFB::get_attributes(){
     pugi::xml_document doc;
-    pugi::xml_parse_result result = doc.load_file(xml_file_address);
+    pugi::xml_parse_result result = doc.load_file(xml_file_address.c_str());
     if (!result){
         cout << "ERROR: " << result.description();
     }
@@ -122,13 +126,26 @@ int BasicFB::get_count_vars(){
     return inputVars_attrebutes.size();
 }
 
-
-
-BasicFB* create_basic_fb(const char* xml_file_address) {
-    // Просто создаем объект BasicFB и возвращаем указатель
-    return new BasicFB(xml_file_address);
+const string BasicFB::get_name_FB(){
+    return name_FB;
 }
 
-void get_name(BasicFB *a){
-    a->get_attributes();
+int BasicFB::get_countEvent_InputWith_var(){
+    int count = 0;
+    for(EventInputs a : eventInputs_attrebutes){
+        if (a.vars.empty() == false){
+            count += 1;
+        }
+    }
+    return count;
+}
+
+int BasicFB::get_countEvent_OutputsWith_var(){
+    int count = 0;
+    for(EventOutputs a : eventOutputs_attrebutes){
+        if (a.vars.empty() == false){
+            count += 1;
+        }
+    }
+    return count;
 }

@@ -14,9 +14,9 @@ BasicFB_image::BasicFB_image() : window(sf::VideoMode(800, 600), "Save to PNG", 
     
     // Пытаемся загрузить шрифт из разных мест
     const char* fontPaths[] = {
-        "cour.ttf",                            // Текущая директория
-        "C:/Windows/Fonts/cour.ttf",           // Windows
-        "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf", // Linux
+        "cour.ttf",
+        "C:/Windows/Fonts/cour.ttf",
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
         nullptr
     };
     
@@ -38,6 +38,7 @@ BasicFB_image::~BasicFB_image() {
     if (window.isOpen()) {
         window.close();
     }
+    font.reset();
 }
 
 // Создание окна
@@ -88,7 +89,7 @@ void BasicFB_image::addDrawable(std::function<void(sf::RenderTarget&)> drawFunc)
 }
 
 // Контур функционального блока
-void BasicFB_image::addTransparentBeveledRectangle(float x, float y, float width, float height_event, float height_vars, float bevelSize, float outlineThickness) {
+void BasicFB_image::addMainContour(float x, float y, float width, float height_event, float height_vars, float bevelSize, float outlineThickness) {
     
     addDrawable([=](sf::RenderTarget& target) {
         // Проверяем и ограничиваем размер фаски
@@ -139,6 +140,16 @@ void BasicFB_image::addText(const std::string& text, float x, float y) {
     });
 }
 
+float BasicFB_image::get_width_text(const std::string& text_){
+    if (!font || font->getInfo().family.empty()) {
+        return text_.length() * 12;  // Возвращаем примерное значение
+    }
+    sf::Text text(text_, *font, 20);
+    sf::FloatRect bounds = text.getLocalBounds();
+    float width = bounds.width;
+    return width;
+}
+
 // Треугольник
 void BasicFB_image::addTriangle(float x, float y){
 
@@ -151,15 +162,15 @@ void BasicFB_image::addTriangle(float x, float y){
         shape.setPoint(1, sf::Vector2f(x + (text_size * 0.866), y + text_size/2));
         shape.setPoint(2, sf::Vector2f(x, y + text_size));
 
-        shape.setFillColor(sf::Color::Transparent);
-        shape.setOutlineColor(sf::Color::Black);
+        shape.setFillColor(sf::Color::Black); // Transparent
+        shape.setOutlineColor(sf::Color::Transparent);
         shape.setOutlineThickness(1.0f);
         
         target.draw(shape);
     });
 }
 
-// Линия
+// Линии
 
 void BasicFB_image::addLine(float x, float y, float length){
     addDrawable([=](sf::RenderTarget& target) {
@@ -182,5 +193,28 @@ void BasicFB_image::addLine(float x, float y, float length, const int a){
         line[0].color = sf::Color::Black;
         line[1].color = sf::Color::Black;
         target.draw(line);
+    });
+}
+
+// Соединение event-var
+void BasicFB_image::addConnection(float x, float y, float y_var){
+        addDrawable([=](sf::RenderTarget& target) {
+        // Создаем ConvexShape
+        sf::ConvexShape shape;
+        const int size_square = 14;
+        shape.setPointCount(4);
+
+        shape.setPoint(0, sf::Vector2f(x - size_square/2, y - size_square/2));
+        shape.setPoint(1, sf::Vector2f(x + size_square/2, y - size_square/2));
+        shape.setPoint(2, sf::Vector2f(x + size_square/2, y + size_square/2));
+        shape.setPoint(3, sf::Vector2f(x - size_square/2, y + size_square/2));
+
+        shape.setFillColor(sf::Color::Transparent);
+        shape.setOutlineColor(sf::Color::Black);
+        shape.setOutlineThickness(1.0f);
+        
+        
+
+        target.draw(shape);
     });
 }

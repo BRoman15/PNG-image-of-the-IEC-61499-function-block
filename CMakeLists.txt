@@ -39,7 +39,7 @@ include_directories(
 )
 
 # Создаем исполняемый файл
-add_executable(main src/main.cpp src/FB_lib.cpp src/FB_lib_graphic.cpp)
+add_executable(main src/main.cpp src/FB_lib.cpp src/FB_lib_graphic.cpp src/Connection.cpp)
 
 # Подключаем библиотеки
 target_link_libraries(main PRIVATE
