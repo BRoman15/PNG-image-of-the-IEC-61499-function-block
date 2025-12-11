@@ -215,7 +215,7 @@ void BasicFB_image::addLine(float x, float y, float length, const int a){
 
 // Соединение event-var
 void BasicFB_image::addConnection(float x, float y, float y_var){
-        addDrawable([=](sf::RenderTarget& target) {
+    addDrawable([=](sf::RenderTarget& target) {
         // Создаем ConvexShape
         sf::ConvexShape shape;
         shape.setPointCount(4);
@@ -229,8 +229,28 @@ void BasicFB_image::addConnection(float x, float y, float y_var){
         shape.setOutlineColor(sf::Color::Black);
         shape.setOutlineThickness(1.0f);
         
-        
-
         target.draw(shape);
+
+        sf::VertexArray line(sf::Lines, 2);
+        line[0].position = sf::Vector2f(x, y);
+        line[1].position = sf::Vector2f(x, y + y_var);
+
+        line[0].color = sf::Color::Black;
+        line[1].color = sf::Color::Black;
+        target.draw(line);
+
+        sf::ConvexShape shape1;
+        shape1.setPointCount(4);
+
+        shape1.setPoint(0, sf::Vector2f(x - size_square/2, y + y_var - size_square/2));
+        shape1.setPoint(1, sf::Vector2f(x + size_square/2, y + y_var - size_square/2));
+        shape1.setPoint(2, sf::Vector2f(x + size_square/2, y + y_var + size_square/2));
+        shape1.setPoint(3, sf::Vector2f(x - size_square/2, y + y_var + size_square/2));
+
+        shape1.setFillColor(sf::Color::Transparent);
+        shape1.setOutlineColor(sf::Color::Black);
+        shape1.setOutlineThickness(1.0f);
+
+        target.draw(shape1);
     });
 }

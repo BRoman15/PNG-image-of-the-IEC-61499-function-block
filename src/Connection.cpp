@@ -1,5 +1,6 @@
 #include "C:\\VSCod\\PNG-image-of-the-IEC-61499-function-block\\include\\Connection.h"
 #include <iostream>
+#include <map>
 #include <cmath>
 
 Connection::Connection(){
@@ -51,10 +52,74 @@ void Connection::rendering_FB(){
         x_FB + trunc(width_FB/2) - trunc(image->get_width_text(FB->get_name_FB())/2),
         y_FB - trunc((image->text_size)+10)/2);
     
-    // добавление event input
+    // добавление var input
     int top_margin = 25;
-    int coefficient_order_connections = 0;
     int extra_length_connection = FB->get_countEvent_InputWith_var()*5;
+    map<string, float> var_for_connection;
+    for (InputVars event : FB->inputVars_attrebutes){
+        image->addTriangle_Blue(x_FB, y_FB + top_margin);
+        image->addText(event.name,
+            x_FB + image->text_size / 2 + 5,
+            y_FB + top_margin - 5);
+        image->addLine(x_FB,
+            y_FB + top_margin + image->text_size/2,
+            -(10 + image->size_square * FB->get_countEvent_InputWith_var() + 10 + extra_length_connection));
+
+        image->addText(event.type,
+            x_FB - (10 + image->size_square * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) - image->get_width_text(event.type) -15,
+            y_FB + top_margin - 5);
+
+        if (event.comment.empty() == false){
+            image->addLine(
+                x_FB - (10 + image->size_square * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) - image->get_width_text(event.type) -35,
+                y_FB + top_margin + image->text_size/2,
+                5);
+        }
+        
+        image->addText(event.comment,
+            x_FB - (10 + image->size_square * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) - image->get_width_text(event.type) -50 - image->get_width_text(event.comment),
+            y_FB + top_margin - 5);
+        var_for_connection[event.name] = y_FB + top_margin + image->text_size/2;
+        top_margin += 30;
+    }
+
+    // добавление var output
+    top_margin = 25;
+    extra_length_connection = FB->get_countEvent_InputWith_var()*5;
+    for (OutputVars event : FB->outputVars_attrebutes){
+        image->addTriangle_Blue(x_FB + width_FB - image->text_size/2, y_FB + top_margin);
+        image->addText(event.name,
+            x_FB + width_FB - image->text_size * 2 - 12,
+            y_FB + top_margin - 5);
+        image->addLine(x_FB + width_FB,
+            y_FB + top_margin + image->text_size/2,
+            10 + image->size_square * FB->get_countEvent_InputWith_var() + 10 + extra_length_connection);
+
+        image->addText(event.type,
+            x_FB + width_FB + (10 + image->size_square * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) +15,
+            y_FB + top_margin - 5);
+
+        if (event.comment.empty() == false){
+            image->addLine(
+                x_FB + width_FB + (10 + image->size_square * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) + image->get_width_text(event.type) + 30,
+                y_FB + top_margin + image->text_size/2,
+                5);
+        }
+
+        image->addText(event.comment,
+            x_FB + width_FB + (10 + image->size_square * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) + image->get_width_text(event.type) + 45,
+            y_FB + top_margin - 5);
+        
+        var_for_connection[event.name] = y_FB + top_margin + image->text_size/2;
+        top_margin += 30;
+    }
+
+    image->update();
+
+    // добавление event input
+    top_margin = 25;
+    int coefficient_order_connections = 0;
+    extra_length_connection = FB->get_countEvent_InputWith_var()*5;
     for (EventInputs event : FB->eventInputs_attrebutes){
         image->addTriangle_Green(x_FB, y_FB - height_event + top_margin);
         image->addText(event.name, x_FB + image->text_size / 2 + 5, y_FB - height_event + top_margin - 5);
@@ -63,8 +128,11 @@ void Connection::rendering_FB(){
             -(10 + image->size_square * FB->get_countEvent_InputWith_var() + 10 + extra_length_connection));
 
         if (event.vars.empty() == false){
-            image->addConnection(x_FB - 10 - image->size_square - coefficient_order_connections,
-                y_FB - height_event + top_margin + image->text_size/2, 1);
+            for (string var : event.vars){
+                image->addConnection(x_FB - 10 - image->size_square - coefficient_order_connections,
+                    y_FB - height_event + top_margin + image->text_size/2,
+                    var_for_connection[var] - (y_FB - height_event + top_margin + image->text_size/2));
+            }
             coefficient_order_connections += 15;
         }
         image->addText(event.type,
@@ -99,8 +167,11 @@ void Connection::rendering_FB(){
             10 + image->size_square * FB->get_countEvent_OutputsWith_var() + 10 + extra_length_connection);
 
         if (event.vars.empty() == false){
-            image->addConnection(x_FB + width_FB + 10 + image->size_square + coefficient_order_connections,
-                y_FB - height_event + top_margin + image->text_size/2, 1);
+            for (string var : event.vars){
+                image->addConnection(x_FB + width_FB + 10 + image->size_square + coefficient_order_connections,
+                    y_FB - height_event + top_margin + image->text_size/2,
+                    var_for_connection[var] - (y_FB - height_event + top_margin + image->text_size/2));
+            }
             coefficient_order_connections += 15;
         }
         image->addText(event.type,
@@ -119,78 +190,4 @@ void Connection::rendering_FB(){
             y_FB - height_event + top_margin - 5);
         top_margin += 30;
     }
-
-    // добавление var input
-    top_margin = 25;
-    // coefficient_order_connections = 0;
-    extra_length_connection = FB->get_countEvent_InputWith_var()*5;
-    for (InputVars event : FB->inputVars_attrebutes){
-        image->addTriangle_Blue(x_FB, y_FB + top_margin);
-        image->addText(event.name,
-            x_FB + image->text_size / 2 + 5,
-            y_FB + top_margin - 5);
-        image->addLine(x_FB,
-            y_FB + top_margin + image->text_size/2,
-            -(10 + image->size_square * FB->get_countEvent_InputWith_var() + 10 + extra_length_connection));
-
-    //     if (event.vars.empty() == false){
-    //         image->addConnection(x_FB - 10 - image->size_square - coefficient_order_connections,
-    //             y_FB - height_event + top_margin + image->text_size/2, 1);
-    //         coefficient_order_connections += 15;
-    //     }
-
-        image->addText(event.type,
-            x_FB - (10 + image->size_square * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) - image->get_width_text(event.type) -15,
-            y_FB + top_margin - 5);
-
-        if (event.comment.empty() == false){
-            image->addLine(
-                x_FB - (10 + image->size_square * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) - image->get_width_text(event.type) -35,
-                y_FB + top_margin + image->text_size/2,
-                5);
-        }
-        
-        image->addText(event.comment,
-            x_FB - (10 + image->size_square * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) - image->get_width_text(event.type) -50 - image->get_width_text(event.comment),
-            y_FB + top_margin - 5);
-        top_margin += 30;
-    }
-
-    // добавление var output
-    top_margin = 25;
-    // coefficient_order_connections = 0;
-    extra_length_connection = FB->get_countEvent_InputWith_var()*5;
-    for (OutputVars event : FB->outputVars_attrebutes){
-        image->addTriangle_Blue(x_FB + width_FB - image->text_size/2, y_FB + top_margin);
-        image->addText(event.name,
-            x_FB + width_FB - image->text_size * 2 - 12,
-            y_FB + top_margin - 5);
-        image->addLine(x_FB + width_FB,
-            y_FB + top_margin + image->text_size/2,
-            10 + image->size_square * FB->get_countEvent_InputWith_var() + 10 + extra_length_connection);
-
-    //     if (event.vars.empty() == false){
-    //         image->addConnection(x_FB - 10 - image->size_square - coefficient_order_connections,
-    //             y_FB - height_event + top_margin + image->text_size/2, 1);
-    //         coefficient_order_connections += 15;
-    //     }
-
-        image->addText(event.type,
-            x_FB + width_FB + (10 + image->size_square * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) +15,
-            y_FB + top_margin - 5);
-            
-        if (event.comment.empty() == false){
-            image->addLine(
-                x_FB + width_FB + (10 + image->size_square * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) + image->get_width_text(event.type) + 30,
-                y_FB + top_margin + image->text_size/2,
-                5);
-        }
-
-        image->addText(event.comment,
-            x_FB + width_FB + (10 + image->size_square * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) + image->get_width_text(event.type) + 45,
-            y_FB + top_margin - 5);
-        top_margin += 30;
-    }
-
-    image->update();
 }

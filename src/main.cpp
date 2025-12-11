@@ -28,7 +28,7 @@
 
 int main(){
     Connection a;
-    a.load_from_XML("C:\\VSCod\\PNG-image-of-the-IEC-61499-function-block\\test_data_xml\\INT2INT.xml");
+    a.load_from_XML("C:\\VSCod\\PNG-image-of-the-IEC-61499-function-block\\test_data_xml\\ADD_2.xml");
     a.rendering_FB();
     a.showWindow();
 }
