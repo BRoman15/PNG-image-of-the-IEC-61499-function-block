@@ -151,10 +151,9 @@ float BasicFB_image::get_width_text(const std::string& text_){
 }
 
 // Треугольник
-void BasicFB_image::addTriangle(float x, float y){
+void BasicFB_image::addTriangle_Green(float x, float y){
 
         addDrawable([=](sf::RenderTarget& target) {
-        // Создаем ConvexShape
         sf::ConvexShape shape;
         shape.setPointCount(3);
 
@@ -163,6 +162,24 @@ void BasicFB_image::addTriangle(float x, float y){
         shape.setPoint(2, sf::Vector2f(x, y + text_size));
 
         shape.setFillColor(sf::Color::Green); // Transparent
+        shape.setOutlineColor(sf::Color::Black);
+        shape.setOutlineThickness(1.0f);
+        
+        target.draw(shape);
+    });
+}
+
+void BasicFB_image::addTriangle_Blue(float x, float y){
+
+        addDrawable([=](sf::RenderTarget& target) {
+        sf::ConvexShape shape;
+        shape.setPointCount(3);
+
+        shape.setPoint(0, sf::Vector2f(x, y));
+        shape.setPoint(1, sf::Vector2f(x + (text_size * 0.5), y + text_size/2));
+        shape.setPoint(2, sf::Vector2f(x, y + text_size));
+
+        shape.setFillColor(sf::Color::Blue);
         shape.setOutlineColor(sf::Color::Black);
         shape.setOutlineThickness(1.0f);
         

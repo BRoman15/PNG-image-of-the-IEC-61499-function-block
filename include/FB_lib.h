@@ -38,8 +38,10 @@ class BasicFB{
         BasicFB(const char * xml_file_address_);
         BasicFB(const std::string& xml_file_address_);
         void get_attributes();
-        int get_count_event();
-        int get_count_vars();
+        int get_count_eventInputs();
+        int get_count_eventOutputs();
+        int get_count_varsInputs();
+        int get_count_varsOutputs();
         int get_countEvent_InputWith_var();
         int get_countEvent_OutputsWith_var();
         const string get_name_FB();

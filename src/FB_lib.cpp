@@ -120,12 +120,20 @@ void BasicFB::get_attributes(){
 
 }
 
-int BasicFB::get_count_event(){
+int BasicFB::get_count_eventInputs(){
     return eventInputs_attrebutes.size();
 }
 
-int BasicFB::get_count_vars(){
+int BasicFB::get_count_eventOutputs(){
+    return eventOutputs_attrebutes.size();
+}
+
+int BasicFB::get_count_varsInputs(){
     return inputVars_attrebutes.size();
+}
+
+int BasicFB::get_count_varsOutputs(){
+    return outputVars_attrebutes.size();
 }
 
 const string BasicFB::get_name_FB(){
