@@ -1,4 +1,4 @@
-#include "C:\VSCod\PNG-image-of-the-IEC-61499-function-block\include\FB_lib.h"
+#include "FB_lib.h"
 #include "pugixml.hpp"
 #include <iostream>
 #include <iomanip>

@@ -1,4 +1,4 @@
-#include "C:\\VSCod\\PNG-image-of-the-IEC-61499-function-block\\include\\Connection.h"
+#include "Connection.h"
 #include <iostream>
 #include <map>
 #include <cmath>
