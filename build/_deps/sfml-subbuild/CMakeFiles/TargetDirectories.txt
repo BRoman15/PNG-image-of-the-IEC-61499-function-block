@@ -1,3 +1,0 @@
-C:/VSCod/PNG-image-of-the-IEC-61499-function-block/build/_deps/sfml-subbuild/CMakeFiles/sfml-populate.dir
-C:/VSCod/PNG-image-of-the-IEC-61499-function-block/build/_deps/sfml-subbuild/CMakeFiles/edit_cache.dir
-C:/VSCod/PNG-image-of-the-IEC-61499-function-block/build/_deps/sfml-subbuild/CMakeFiles/rebuild_cache.dir
