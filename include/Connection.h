@@ -11,8 +11,8 @@ class Connection{
         const int y_size_window = 720;
     public:
         Connection();
-        
+        ~Connection();
         bool load_from_XML(const string& xmlFilePath);
-        void showWindow();
+        void show_and_save_FB();
         void rendering_FB();
 };

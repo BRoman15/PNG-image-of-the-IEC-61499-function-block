@@ -11,7 +11,7 @@ BasicFB_image::BasicFB_image() : window(sf::VideoMode(1280, 720), "Save to PNG",
 
     // Загрузка шрифта
     font = std::make_unique<sf::Font>();
-    
+
     // Пытаемся загрузить шрифт из разных мест
     const char* fontPaths[] = {
         "cour.ttf",
@@ -53,10 +53,13 @@ void BasicFB_image::update() {
     sf::Event event;
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
+            if (!autoSaveFilename.empty()) {
+                saveToPNG(autoSaveFilename);
+            }
             close();
         }
         if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::S) {
-            saveToPNG("FB.png");
+            saveToPNG(autoSaveFilename.empty() ? "FB.png" : autoSaveFilename);
         }
     }
 
@@ -71,6 +74,10 @@ void BasicFB_image::update() {
     
     window.display();
     renderTexture.display();
+}
+
+void BasicFB_image::setAutoSaveFilename(const std::string& filename){
+    autoSaveFilename = filename;
 }
 
 bool BasicFB_image::isWindowOpen(){

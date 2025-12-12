@@ -7,6 +7,11 @@ Connection::Connection(){
     image = make_unique<BasicFB_image>();
 }
 
+Connection::~Connection(){
+    FB.reset();
+    image.reset();
+}
+
 bool Connection::load_from_XML(const string& xmlFilePath){
     FB = make_unique<BasicFB>(xmlFilePath);
     FB->get_attributes();
@@ -19,7 +24,7 @@ bool Connection::load_from_XML(const string& xmlFilePath){
     return true;
 }
 
-void Connection::showWindow(){
+void Connection::show_and_save_FB(){
     if (!image) {
         cout << "ERROR: image not initialized" << endl;
         return;
@@ -34,6 +39,10 @@ void Connection::rendering_FB(){
         cout << "ERROR: FB or image not initialized" << endl;
         return;
     }
+
+    string filename = FB->name_FB + ".png";
+    image->setAutoSaveFilename(filename);
+
     // Добавление главного контура
     const int height_event = max(FB->get_count_eventInputs() * 30 + 40, FB->get_count_eventOutputs() * 30 + 40);
     const int height_var = max(FB->get_count_varsInputs() * 30 + 40, FB->get_count_varsOutputs() * 30 + 40);
