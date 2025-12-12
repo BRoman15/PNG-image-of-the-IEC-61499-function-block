@@ -36,6 +36,7 @@ class Parser{
     
         Parser(const char * xml_file_address_);
         Parser(const std::string& xml_file_address_);
+        ~Parser();
         void get_attributes();
         int get_count_eventInputs();
         int get_count_eventOutputs();

@@ -14,6 +14,7 @@ Parser::Parser(const std::string& xml_file_address_)
     : xml_file_address(xml_file_address_) {
 }
 
+Parser::~Parser() = default;
 
 void Parser::get_attributes(){
     pugi::xml_document doc;
