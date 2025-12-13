@@ -16,22 +16,10 @@ bool FB_Visualizer::load_from_XML(const string& xmlFilePath){
     FB = make_unique<Parser>(xmlFilePath);
     FB->get_attributes();
     if (FB->name_FB.empty()){
-        cout << "ERROR: file "<< xmlFilePath <<" not found";
         FB.reset();
         return false;
     }
-    cout << "Successfully loaded FB: " << FB->name_FB << endl;
     return true;
-}
-
-void FB_Visualizer::show_and_save_FB(){
-    if (!image) {
-        cout << "ERROR: image not initialized" << endl;
-        return;
-    }
-    while (image->isWindowOpen()) {
-        image->update();
-    }
 }
 
 void FB_Visualizer::rendering_FB(){
@@ -44,9 +32,15 @@ void FB_Visualizer::rendering_FB(){
     image->setAutoSaveFilename(filename);
 
     // Добавление главного контура
-    const int height_event = max(FB->get_count_eventInputs() * 30 + 40, FB->get_count_eventOutputs() * 30 + 40);
-    const int height_var = max(FB->get_count_varsInputs() * 30 + 40, FB->get_count_varsOutputs() * 30 + 40);
-    int width_FB = image -> get_width_text(FB -> get_name_FB()) + 30;
+    const int bevelSize = 20;
+    const int width_inf_line = 30;
+    const int vertical_indent = 40;
+    const int horizontal_indent = 30;
+    const int height_event = max(FB->get_count_eventInputs() * width_inf_line + vertical_indent, 
+                                FB->get_count_eventOutputs() * width_inf_line + vertical_indent);
+    const int height_var = max(FB->get_count_varsInputs() * width_inf_line + vertical_indent,
+                                FB->get_count_varsOutputs() * width_inf_line + vertical_indent);
+    int width_FB = image -> get_width_text(FB -> get_name_FB()) + horizontal_indent;
     const int x_FB = x_size_window / 2 - width_FB / 2;
     const int y_FB = (y_size_window - (height_event + height_var)) / 2 + height_event;
 
@@ -54,7 +48,7 @@ void FB_Visualizer::rendering_FB(){
         width_FB = 150;
     }
 
-    image -> addMainContour(x_FB, y_FB, width_FB, height_event, height_var, 20);
+    image -> addMainContour(x_FB, y_FB, width_FB, height_event, height_var, bevelSize);
 
     // Название
     image ->addText(FB->get_name_FB(),
@@ -198,5 +192,15 @@ void FB_Visualizer::rendering_FB(){
             x_FB + width_FB + (10 + image->size_square * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) + image->get_width_text(event.type) + 45,
             y_FB - height_event + top_margin - 5);
         top_margin += 30;
+    }
+}
+
+void FB_Visualizer::show_and_save_FB(){
+    if (!image) {
+        cout << "ERROR: image not initialized" << endl;
+        return;
+    }
+    while (image->isWindowOpen()) {
+        image->update();
     }
 }

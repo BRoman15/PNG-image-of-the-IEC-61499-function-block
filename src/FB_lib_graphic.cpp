@@ -12,7 +12,6 @@ BasicFB_image::BasicFB_image() : window(sf::VideoMode(1280, 720), "Save to PNG",
     // Загрузка шрифта
     font = std::make_unique<sf::Font>();
 
-    // Пытаемся загрузить шрифт из разных мест
     const char* fontPaths[] = {
         "cour.ttf",
         "C:/Windows/Fonts/cour.ttf",
