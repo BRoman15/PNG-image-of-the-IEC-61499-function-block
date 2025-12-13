@@ -9,10 +9,11 @@ class FB_Visualizer{
         unique_ptr<BasicFB_image> image;
         const int x_size_window = 1280;
         const int y_size_window = 720;
+        void load_from_XML(const string& xmlFilePath);
+        void rendering_FB();
+        void showWindow();
     public:
         FB_Visualizer();
         ~FB_Visualizer();
-        bool load_from_XML(const string& xmlFilePath);
-        void show_and_save_FB();
-        void rendering_FB();
+        void show_and_save_FB(const string& xmlFilePath);
 };

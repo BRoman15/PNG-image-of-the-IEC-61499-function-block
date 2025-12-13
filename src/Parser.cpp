@@ -20,7 +20,7 @@ void Parser::get_attributes(){
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(xml_file_address.c_str());
     if (!result){
-        cout << "ERROR: " << result.description();
+        cerr << "ERROR: " << result.description();
     }
 
     //Получение имени функционального блока

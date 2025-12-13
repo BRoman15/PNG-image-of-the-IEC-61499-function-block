@@ -1,6 +1,7 @@
 #include "FB_lib_graphic.h"
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 #include <vector>
 #include "SFML\Graphics.hpp"
 
@@ -15,21 +16,27 @@ BasicFB_image::BasicFB_image() : window(sf::VideoMode(1280, 720), "Save to PNG",
     const char* fontPaths[] = {
         "cour.ttf",
         "C:/Windows/Fonts/cour.ttf",
+        "C:/Windows/Fonts/courbd.ttf",
+        "C:/Windows/Fonts/couri.ttf",
         "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
         nullptr
     };
     
     bool fontLoaded = false;
-    for (int i = 0; fontPaths[i] != nullptr; i++) {
-        if (font->loadFromFile(fontPaths[i])) {
-            fontLoaded = true;
-            break;
+    for (int i = 0; fontPaths[i] != nullptr; i++){
+        std::ifstream testFile(fontPaths[i]);
+        if (testFile.good()){
+            testFile.close();
+            if (font->loadFromFile(fontPaths[i])){
+                fontLoaded = true;
+                break;
+            }
         }
     }
     
-    if (fontLoaded == false) {
-        std::cout << "ERROR: font is not loaded" << std::endl;
-        std::cout << "Place the arial.ttf file in the program folder" << std::endl;
+    if (!fontLoaded) {
+        std::cerr << "WARNING: Cour font not found. Using default SFML font." << std::endl;
     }
 }
 

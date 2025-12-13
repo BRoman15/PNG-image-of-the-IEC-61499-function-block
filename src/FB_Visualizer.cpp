@@ -12,25 +12,19 @@ FB_Visualizer::~FB_Visualizer(){
     image.reset();
 }
 
-bool FB_Visualizer::load_from_XML(const string& xmlFilePath){
+void FB_Visualizer::load_from_XML(const string& xmlFilePath){
     FB = make_unique<Parser>(xmlFilePath);
     FB->get_attributes();
     if (FB->name_FB.empty()){
-        FB.reset();
-        return false;
+        cerr << "Warning: The FB name was not found. Using defolt name.";
+        FB->name_FB = "defolt";
     }
-    return true;
 }
 
 void FB_Visualizer::rendering_FB(){
-    if (!FB || !image) {
-        cout << "ERROR: FB or image not initialized" << endl;
-        return;
-    }
-
     string filename = FB->name_FB + ".png";
     image->setAutoSaveFilename(filename);
-
+    
     // Добавление главного контура
     const int bevelSize = 20;
     const int width_inf_line = 30;
@@ -195,12 +189,13 @@ void FB_Visualizer::rendering_FB(){
     }
 }
 
-void FB_Visualizer::show_and_save_FB(){
-    if (!image) {
-        cout << "ERROR: image not initialized" << endl;
-        return;
-    }
+void FB_Visualizer::showWindow(){
     while (image->isWindowOpen()) {
         image->update();
     }
+}
+void FB_Visualizer::show_and_save_FB(const string& xmlFilePath){
+    load_from_XML(xmlFilePath);
+    rendering_FB();
+    showWindow();
 }
