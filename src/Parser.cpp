@@ -4,15 +4,11 @@
 #include <iomanip>
 #include <fstream>
 
-
-Parser::Parser(const char * xml_file_address_){
+Parser::Parser(const std::string& xml_file_address_){
     xml_file_address = xml_file_address_;
 }
 
-Parser::Parser(const std::string& xml_file_address_)
-    : xml_file_address(xml_file_address_) {
-}
-
+// Парсинг
 void Parser::get_attributes(){
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(xml_file_address.c_str());
@@ -75,7 +71,6 @@ void Parser::get_attributes(){
         eventOutputs_attrebutes.push_back(event_output);
     }
 
-
     //Получаем атрибуты подузлов узла InputVars
     pugi::xpath_node_set elements_vinput = doc.select_nodes("//InputVars//*");          
     for (pugi::xpath_node xpath_node : elements_vinput) {
@@ -95,7 +90,6 @@ void Parser::get_attributes(){
         inputVars_attrebutes.push_back(vardeclaration_input);
     }
 
-
     //Получаем атрибуты подузлов узла OutputVars
     pugi::xpath_node_set elements_voutput = doc.select_nodes("//OutputVars//*");          
     for (pugi::xpath_node xpath_node : elements_voutput) {
@@ -114,8 +108,6 @@ void Parser::get_attributes(){
         }
         outputVars_attrebutes.push_back(vardeclaration_output);
     }
-
-
 }
 
 // кол-во событий на вход

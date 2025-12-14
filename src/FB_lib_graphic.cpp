@@ -1,6 +1,5 @@
 #include "FB_lib_graphic.h"
 #include <iostream>
-#include <iomanip>
 #include <fstream>
 #include <vector>
 #include "SFML\Graphics.hpp"
@@ -27,14 +26,15 @@ BasicFB_image::BasicFB_image() : window(sf::VideoMode(1280, 720), "Save to PNG",
     for (int i = 0; fontPaths[i] != nullptr; i++){
         std::ifstream testFile(fontPaths[i]);
         if (testFile.good()){
-            testFile.close();
             if (font->loadFromFile(fontPaths[i])){
                 fontLoaded = true;
                 break;
             }
+            testFile.close();
         }
     }
-    
+
+    // Если шрифт не нашелся, используется стандартный SFML
     if (!fontLoaded) {
         std::cerr << "WARNING: Cour font not found. Using default SFML font." << std::endl;
     }
@@ -48,7 +48,6 @@ BasicFB_image::~BasicFB_image() {
 }
 
 // Создание окна
-
 bool BasicFB_image::saveToPNG(const std::string& image_filename) {
     return renderTexture.getTexture().copyToImage().saveToFile(image_filename);
 }
@@ -56,6 +55,7 @@ bool BasicFB_image::saveToPNG(const std::string& image_filename) {
 void BasicFB_image::update() {
     if (!isOpen) return;
 
+    // Показ окна, сохранение при закрытии
     sf::Event event;
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
@@ -71,8 +71,8 @@ void BasicFB_image::update() {
     
     // Отрисовка всех объектов
     for (auto& drawFunc : drawables) {
-        drawFunc(window);           // Рисуем в окно
-        drawFunc(renderTexture);    // Рисуем в текстуру для сохранения
+        drawFunc(window);
+        drawFunc(renderTexture);
     }
     
     window.display();
@@ -100,7 +100,6 @@ void BasicFB_image::addDrawable(std::function<void(sf::RenderTarget&)> drawFunc)
 
 // Контур функционального блока
 void BasicFB_image::addMainContour(float x, float y, float width, float height_event, float height_vars, float bevelSize, float outlineThickness) {
-    
     addDrawable([=](sf::RenderTarget& target) {
         // Проверяем и ограничиваем размер фаски
         float safeBevel = bevelSize / 2;
@@ -109,11 +108,9 @@ void BasicFB_image::addMainContour(float x, float y, float width, float height_e
             safeBevel = maxBevel;
         }
         
-        // Создаем ConvexShape
         sf::ConvexShape shape;
         shape.setPointCount(14);
         
-        // Устанавливаем точки фигуры
         shape.setPoint(0, sf::Vector2f(x + width - safeBevel, y));
         shape.setPoint(1, sf::Vector2f(x + width, y + safeBevel));
         shape.setPoint(2, sf::Vector2f(x + width, y + height_vars - safeBevel));
@@ -129,9 +126,6 @@ void BasicFB_image::addMainContour(float x, float y, float width, float height_e
         shape.setPoint(12, sf::Vector2f(x + width, y - height_event + safeBevel));
         shape.setPoint(13, sf::Vector2f(x + width, y - safeBevel));
 
-
-
-        // ПРОЗРАЧНАЯ заливка, ЧЕРНЫЙ контур
         shape.setFillColor(sf::Color::Transparent);
         shape.setOutlineColor(sf::Color::Black);
         shape.setOutlineThickness(outlineThickness);
@@ -150,9 +144,10 @@ void BasicFB_image::addText(const std::string& text, float x, float y) {
     });
 }
 
+// Получачем длинну строки в прикселях
 float BasicFB_image::get_width_text(const std::string& text_){
     if (!font || font->getInfo().family.empty()) {
-        return text_.length() * 12;  // Возвращаем примерное значение
+        return text_.length() * 12;  //Примерное значение
     }
     sf::Text text(text_, *font, 20);
     sf::FloatRect bounds = text.getLocalBounds();
@@ -168,10 +163,10 @@ void BasicFB_image::addTriangle_Green(float x, float y){
         shape.setPointCount(3);
 
         shape.setPoint(0, sf::Vector2f(x, y));
-        shape.setPoint(1, sf::Vector2f(x + (text_size * 0.5), y + text_size/2)); //0.866
+        shape.setPoint(1, sf::Vector2f(x + (text_size * 0.5), y + text_size/2));
         shape.setPoint(2, sf::Vector2f(x, y + text_size));
 
-        shape.setFillColor(sf::Color::Green); // Transparent
+        shape.setFillColor(sf::Color::Green);
         shape.setOutlineColor(sf::Color::Black);
         shape.setOutlineThickness(1.0f);
         
@@ -180,7 +175,6 @@ void BasicFB_image::addTriangle_Green(float x, float y){
 }
 
 void BasicFB_image::addTriangle_Blue(float x, float y){
-
         addDrawable([=](sf::RenderTarget& target) {
         sf::ConvexShape shape;
         shape.setPointCount(3);
@@ -198,7 +192,6 @@ void BasicFB_image::addTriangle_Blue(float x, float y){
 }
 
 // Линии
-
 void BasicFB_image::addLine(float x, float y, float length){
     addDrawable([=](sf::RenderTarget& target) {
         sf::VertexArray line(sf::Lines, 2);
@@ -226,7 +219,6 @@ void BasicFB_image::addLine(float x, float y, float length, const int a){
 // Соединение event-var
 void BasicFB_image::addConnection(float x, float y, float y_var){
     addDrawable([=](sf::RenderTarget& target) {
-        // Создаем ConvexShape
         sf::ConvexShape shape;
         shape.setPointCount(4);
 

@@ -33,7 +33,6 @@ class Parser{
         std::vector<OutputVars> outputVars_attrebutes;
         std::string name_FB;
     
-        Parser(const char * xml_file_address_);
         Parser(const std::string& xml_file_address_);
         ~Parser() = default;
         void get_attributes();

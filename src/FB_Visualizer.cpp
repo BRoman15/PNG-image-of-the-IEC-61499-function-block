@@ -12,6 +12,7 @@ FB_Visualizer::~FB_Visualizer(){
     image.reset();
 }
 
+// Загрузка из XML файла
 void FB_Visualizer::load_from_XML(const std::string& xmlFilePath){
     FB = std::make_unique<Parser>(xmlFilePath);
     FB->get_attributes();
@@ -21,6 +22,7 @@ void FB_Visualizer::load_from_XML(const std::string& xmlFilePath){
     }
 }
 
+// Отрисовка элементов по данным XML
 void FB_Visualizer::rendering_FB(){
     std::string filename = FB->name_FB + ".png";
     image->setAutoSaveFilename(filename);
@@ -189,12 +191,14 @@ void FB_Visualizer::rendering_FB(){
     }
 }
 
+// Показ окна
 void FB_Visualizer::showWindow(){
     while (image->isWindowOpen()) {
         image->update();
     }
 }
 
+// Соединение для удобной работы
 void FB_Visualizer::show_and_save_FB(const std::string& xmlFilePath){
     load_from_XML(xmlFilePath);
     rendering_FB();
