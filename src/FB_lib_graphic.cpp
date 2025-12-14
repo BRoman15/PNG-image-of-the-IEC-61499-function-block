@@ -44,7 +44,6 @@ BasicFB_image::~BasicFB_image() {
     if (window.isOpen()) {
         window.close();
     }
-    font.reset();
 }
 
 // Создание окна

@@ -7,11 +7,6 @@ FB_Visualizer::FB_Visualizer(){
     image = std::make_unique<BasicFB_image>();
 }
 
-FB_Visualizer::~FB_Visualizer(){
-    FB.reset();
-    image.reset();
-}
-
 // Загрузка из XML файла
 void FB_Visualizer::load_from_XML(const std::string& xmlFilePath){
     FB = std::make_unique<Parser>(xmlFilePath);

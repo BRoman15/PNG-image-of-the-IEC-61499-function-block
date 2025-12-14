@@ -14,6 +14,6 @@ class FB_Visualizer{
         void showWindow();
     public:
         FB_Visualizer();
-        ~FB_Visualizer();
+        ~FB_Visualizer() = default;
         void show_and_save_FB(const std::string& xmlFilePath);
 };
