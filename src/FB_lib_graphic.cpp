@@ -64,9 +64,6 @@ void BasicFB_image::update() {
             }
             close();
         }
-        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::S) {
-            saveToPNG(autoSaveFilename.empty() ? "FB.png" : autoSaveFilename);
-        }
     }
 
     window.clear(sf::Color::White);

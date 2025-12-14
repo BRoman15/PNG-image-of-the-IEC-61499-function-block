@@ -3,7 +3,6 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-using namespace std;
 
 
 Parser::Parser(const char * xml_file_address_){
@@ -14,13 +13,11 @@ Parser::Parser(const std::string& xml_file_address_)
     : xml_file_address(xml_file_address_) {
 }
 
-Parser::~Parser() = default;
-
 void Parser::get_attributes(){
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(xml_file_address.c_str());
     if (!result){
-        cerr << "ERROR: " << result.description();
+        std::cerr << "ERROR: " << result.description() << std::endl;
     }
 
     //Получение имени функционального блока
@@ -36,17 +33,17 @@ void Parser::get_attributes(){
         pugi::xml_node node = xpath_node.node();
         EventInputs event_input;
         for (pugi::xml_attribute attribut : node.attributes()){
-            if ((string)attribut.name() == "Name"){
+            if ((std::string)attribut.name() == "Name"){
                 event_input.name = attribut.as_string();
             }
-            else if ((string)attribut.name() == "Type"){
+            else if ((std::string)attribut.name() == "Type"){
                 event_input.type = attribut.as_string();                        
             }
-            else if ((string)attribut.name() == "Comment"){
+            else if ((std::string)attribut.name() == "Comment"){
                 event_input.comment = attribut.as_string();                        
             }
         }
-        if ((string)node.first_child().name() == "With"){
+        if ((std::string)node.first_child().name() == "With"){
             countEvent_InputWith_var += 1;
             for (pugi::xml_node node_with : node.children())
                 event_input.vars.push_back(node_with.first_attribute().as_string());                        
@@ -60,17 +57,17 @@ void Parser::get_attributes(){
         pugi::xml_node node = xpath_node.node();
         EventOutputs event_output; 
         for (pugi::xml_attribute attribut : node.attributes()){
-            if ((string)attribut.name() == "Name"){
+            if ((std::string)attribut.name() == "Name"){
                 event_output.name = attribut.as_string();
             }
-            else if ((string)attribut.name() == "Type"){
+            else if ((std::string)attribut.name() == "Type"){
                 event_output.type = attribut.as_string();                        
             }
-            else if ((string)attribut.name() == "Comment"){
+            else if ((std::string)attribut.name() == "Comment"){
                 event_output.comment = attribut.as_string();                        
             }
         }
-        if ((string)node.first_child().name() == "With"){
+        if ((std::string)node.first_child().name() == "With"){
             countEvent_OutputsWith_var += 1;
             for (pugi::xml_node node_with : node.children())
                 event_output.vars.push_back(node_with.first_attribute().as_string());                         
@@ -85,13 +82,13 @@ void Parser::get_attributes(){
         pugi::xml_node node = xpath_node.node();
         InputVars vardeclaration_input; 
         for (pugi::xml_attribute attribut : node.attributes()){
-            if ((string)attribut.name() == "Name"){
+            if ((std::string)attribut.name() == "Name"){
                 vardeclaration_input.name = attribut.as_string();
             }
-            else if ((string)attribut.name() == "Type"){
+            else if ((std::string)attribut.name() == "Type"){
                 vardeclaration_input.type = attribut.as_string();                        
             }
-            else if ((string)attribut.name() == "Comment"){
+            else if ((std::string)attribut.name() == "Comment"){
                 vardeclaration_input.comment = attribut.as_string();                        
             }
         }
@@ -105,13 +102,13 @@ void Parser::get_attributes(){
         pugi::xml_node node = xpath_node.node();
         OutputVars vardeclaration_output; 
         for (pugi::xml_attribute attribut : node.attributes()){
-            if ((string)attribut.name() == "Name"){
+            if ((std::string)attribut.name() == "Name"){
                 vardeclaration_output.name = attribut.as_string();
             }
-            else if ((string)attribut.name() == "Type"){
+            else if ((std::string)attribut.name() == "Type"){
                 vardeclaration_output.type = attribut.as_string();                        
             }
-            else if ((string)attribut.name() == "Comment"){
+            else if ((std::string)attribut.name() == "Comment"){
                 vardeclaration_output.comment = attribut.as_string();                        
             }
         }
@@ -142,7 +139,7 @@ int Parser::get_count_varsOutputs(){
 }
 
 // получаем ФБ
-const string Parser::get_name_FB(){
+const std::string Parser::get_name_FB(){
     return name_FB;
 }
 

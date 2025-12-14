@@ -1,21 +1,20 @@
 #pragma once
 #include <vector>
 #include <iomanip>
-using namespace std;
 
 struct EventInputs{
-    string name;
-    string comment;
-    string type;
-    vector<string> vars;
+    std::string name;
+    std::string comment;
+    std::string type;
+    std::vector<std::string> vars;
 };
 
 struct EventOutputs : public EventInputs{};
 
 struct InputVars{
-    string name;
-    string comment;
-    string type;
+    std::string name;
+    std::string comment;
+    std::string type;
 };
 
 struct OutputVars : public InputVars{};
@@ -23,20 +22,20 @@ struct OutputVars : public InputVars{};
 
 class Parser{
 
-    string xml_file_address;
+    std::string xml_file_address;
     int countEvent_InputWith_var = 0;
     int countEvent_OutputsWith_var = 0;
 
     public:
-        vector<EventInputs>  eventInputs_attrebutes;
-        vector<EventOutputs>  eventOutputs_attrebutes;
-        vector<InputVars> inputVars_attrebutes;
-        vector<OutputVars> outputVars_attrebutes;
-        string name_FB;
+        std::vector<EventInputs>  eventInputs_attrebutes;
+        std::vector<EventOutputs>  eventOutputs_attrebutes;
+        std::vector<InputVars> inputVars_attrebutes;
+        std::vector<OutputVars> outputVars_attrebutes;
+        std::string name_FB;
     
         Parser(const char * xml_file_address_);
         Parser(const std::string& xml_file_address_);
-        ~Parser();
+        ~Parser() = default;
         void get_attributes();
         int get_count_eventInputs();
         int get_count_eventOutputs();
@@ -44,5 +43,5 @@ class Parser{
         int get_count_varsOutputs();
         int get_countEvent_InputWith_var();
         int get_countEvent_OutputsWith_var();
-        const string get_name_FB();
+        const std::string get_name_FB();
 };

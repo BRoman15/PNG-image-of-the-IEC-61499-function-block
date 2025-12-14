@@ -4,7 +4,7 @@
 #include <cmath>
 
 FB_Visualizer::FB_Visualizer(){
-    image = make_unique<BasicFB_image>();
+    image = std::make_unique<BasicFB_image>();
 }
 
 FB_Visualizer::~FB_Visualizer(){
@@ -12,17 +12,17 @@ FB_Visualizer::~FB_Visualizer(){
     image.reset();
 }
 
-void FB_Visualizer::load_from_XML(const string& xmlFilePath){
-    FB = make_unique<Parser>(xmlFilePath);
+void FB_Visualizer::load_from_XML(const std::string& xmlFilePath){
+    FB = std::make_unique<Parser>(xmlFilePath);
     FB->get_attributes();
     if (FB->name_FB.empty()){
-        cerr << "Warning: The FB name was not found. Using defolt name.";
+        std::cerr << "Warning: The FB name was not found. Using defolt name." << std::endl;
         FB->name_FB = "defolt";
     }
 }
 
 void FB_Visualizer::rendering_FB(){
-    string filename = FB->name_FB + ".png";
+    std::string filename = FB->name_FB + ".png";
     image->setAutoSaveFilename(filename);
     
     // Добавление главного контура
@@ -30,9 +30,9 @@ void FB_Visualizer::rendering_FB(){
     const int width_inf_line = 30;
     const int vertical_indent = 40;
     const int horizontal_indent = 30;
-    const int height_event = max(FB->get_count_eventInputs() * width_inf_line + vertical_indent, 
+    const int height_event = std::max(FB->get_count_eventInputs() * width_inf_line + vertical_indent, 
                                 FB->get_count_eventOutputs() * width_inf_line + vertical_indent);
-    const int height_var = max(FB->get_count_varsInputs() * width_inf_line + vertical_indent,
+    const int height_var = std::max(FB->get_count_varsInputs() * width_inf_line + vertical_indent,
                                 FB->get_count_varsOutputs() * width_inf_line + vertical_indent);
     int width_FB = image -> get_width_text(FB -> get_name_FB()) + horizontal_indent;
     const int x_FB = x_size_window / 2 - width_FB / 2;
@@ -52,7 +52,7 @@ void FB_Visualizer::rendering_FB(){
     // добавление var input
     int top_margin = 25;
     int extra_length_connection = FB->get_countEvent_InputWith_var()*5;
-    map<string, float> var_for_connection;
+    std::map<std::string, float> var_for_connection;
     for (InputVars event : FB->inputVars_attrebutes){
         image->addTriangle_Blue(x_FB, y_FB + top_margin);
         image->addText(event.name,
@@ -125,7 +125,7 @@ void FB_Visualizer::rendering_FB(){
             -(10 + image->size_square * FB->get_countEvent_InputWith_var() + 10 + extra_length_connection));
 
         if (event.vars.empty() == false){
-            for (string var : event.vars){
+            for (std::string var : event.vars){
                 image->addConnection(x_FB - 10 - image->size_square - coefficient_order_connections,
                     y_FB - height_event + top_margin + image->text_size/2,
                     var_for_connection[var] - (y_FB - height_event + top_margin + image->text_size/2));
@@ -164,7 +164,7 @@ void FB_Visualizer::rendering_FB(){
             10 + image->size_square * FB->get_countEvent_OutputsWith_var() + 10 + extra_length_connection);
 
         if (event.vars.empty() == false){
-            for (string var : event.vars){
+            for (std::string var : event.vars){
                 image->addConnection(x_FB + width_FB + 10 + image->size_square + coefficient_order_connections,
                     y_FB - height_event + top_margin + image->text_size/2,
                     var_for_connection[var] - (y_FB - height_event + top_margin + image->text_size/2));
@@ -194,7 +194,8 @@ void FB_Visualizer::showWindow(){
         image->update();
     }
 }
-void FB_Visualizer::show_and_save_FB(const string& xmlFilePath){
+
+void FB_Visualizer::show_and_save_FB(const std::string& xmlFilePath){
     load_from_XML(xmlFilePath);
     rendering_FB();
     showWindow();
