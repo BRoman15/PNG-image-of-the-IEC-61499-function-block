@@ -24,7 +24,7 @@ void FB_Visualizer::rendering_FB(){
     if (FB->get_name_FB().empty()){
         throw std::runtime_error("File rendering error");
     }
-    image->setAutoSaveFilename(filename);
+    image->set_AutoSaveFilename(filename);
     
     // Добавление главного контура
     const int bevelSize = 20;

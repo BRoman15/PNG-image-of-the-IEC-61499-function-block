@@ -22,7 +22,7 @@ class BasicFB_image{
         ~BasicFB_image();
         bool isWindowOpen();
         void update();
-        void setAutoSaveFilename(const std::string& filename);
+        void set_AutoSaveFilename(const std::string& filename);
         void close();
         void addDrawable(std::function<void(sf::RenderTarget&)> drawFunc);
         void addMainContour(float x, float y, float width, float height_event, float height_vars, float bevelSize, float outlineThickness = 1.0f);

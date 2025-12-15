@@ -4,8 +4,8 @@
 #include <vector>
 #include "SFML\Graphics.hpp"
 
-BasicFB_image::BasicFB_image() : window(sf::VideoMode(1280, 720), "Save to PNG", sf::Style::Default){
-    isOpen = true;
+BasicFB_image::BasicFB_image(){
+    window.create(sf::VideoMode(1280, 720), "Save to PNG", sf::Style::Default);
     renderTexture.create(1280, 720);
     window.setFramerateLimit(60);
 
@@ -52,7 +52,7 @@ bool BasicFB_image::saveToPNG(const std::string& image_filename) {
 }
 
 void BasicFB_image::update() {
-    if (!isOpen) return;
+    if (!window.isOpen()) return;
 
     // Показ окна, сохранение при закрытии
     sf::Event event;
@@ -61,7 +61,7 @@ void BasicFB_image::update() {
             if (!autoSaveFilename.empty()) {
                 saveToPNG(autoSaveFilename);
             }
-            close();
+            window.close();
         }
     }
 
@@ -78,19 +78,13 @@ void BasicFB_image::update() {
     renderTexture.display();
 }
 
-void BasicFB_image::setAutoSaveFilename(const std::string& filename){
+void BasicFB_image::set_AutoSaveFilename(const std::string& filename){
     autoSaveFilename = filename;
 }
 
 bool BasicFB_image::isWindowOpen(){
-    return isOpen;
+    return window.isOpen();
 }
-
-void BasicFB_image::close() {
-    isOpen = false;
-    window.close();
-}
-
 
 // Добавление объектов
 void BasicFB_image::addDrawable(std::function<void(sf::RenderTarget&)> drawFunc) {
