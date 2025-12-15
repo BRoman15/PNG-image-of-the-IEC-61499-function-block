@@ -13,7 +13,7 @@ void Parser::get_attributes(){
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(xml_file_address.c_str());
     if (!result){
-        std::cerr << "ERROR: " << result.description() << std::endl;
+        throw std::runtime_error(result.description());
     }
 
     //Получение имени функционального блока
@@ -23,8 +23,15 @@ void Parser::get_attributes(){
         name_FB = node.attribute("Name").as_string();
     }
 
+    if (name_FB.empty()){
+        throw std::runtime_error("FB name not found in XML");
+    }
+
     //Получаем атрибуты подузлов узла EventInputs
-    pugi::xpath_node_set elements_input = doc.select_nodes("//EventInputs//Event");           
+    pugi::xpath_node_set elements_input = doc.select_nodes("//EventInputs//Event");     
+    if (elements_input.empty()){
+            throw std::runtime_error("Event input not found in XML");
+    }      
     for (pugi::xpath_node xpath_node : elements_input) {
         pugi::xml_node node = xpath_node.node();
         EventInputs event_input;
@@ -44,11 +51,17 @@ void Parser::get_attributes(){
             for (pugi::xml_node node_with : node.children())
                 event_input.vars.push_back(node_with.first_attribute().as_string());                        
         }
+        if (event_input.name.empty() || event_input.type.empty()){
+            throw std::runtime_error("Incomplete information about one of the event inputs");
+        }
         eventInputs_attrebutes.push_back(event_input);
     }
 
     //Получаем атрибуты подузлов узла EventOutput
-    pugi::xpath_node_set elements_output = doc.select_nodes("//EventOutputs//Event");          
+    pugi::xpath_node_set elements_output = doc.select_nodes("//EventOutputs//Event"); 
+    if (elements_output.empty()){
+        throw std::runtime_error("Event output not found in XML");
+    }            
     for (pugi::xpath_node xpath_node : elements_output) {
         pugi::xml_node node = xpath_node.node();
         EventOutputs event_output; 
@@ -68,11 +81,17 @@ void Parser::get_attributes(){
             for (pugi::xml_node node_with : node.children())
                 event_output.vars.push_back(node_with.first_attribute().as_string());                         
         }
+        if (event_output.name.empty() || event_output.type.empty()){
+            throw std::runtime_error("Incomplete information about one of the event outputs");
+        }
         eventOutputs_attrebutes.push_back(event_output);
     }
 
     //Получаем атрибуты подузлов узла InputVars
-    pugi::xpath_node_set elements_vinput = doc.select_nodes("//InputVars//*");          
+    pugi::xpath_node_set elements_vinput = doc.select_nodes("//InputVars//VarDeclaration");
+    if (elements_vinput.empty()){
+        throw std::runtime_error("Var input not found in XML");
+    } 
     for (pugi::xpath_node xpath_node : elements_vinput) {
         pugi::xml_node node = xpath_node.node();
         InputVars vardeclaration_input; 
@@ -87,11 +106,17 @@ void Parser::get_attributes(){
                 vardeclaration_input.comment = attribut.as_string();                        
             }
         }
+        if (vardeclaration_input.name.empty() || vardeclaration_input.type.empty()){
+            throw std::runtime_error("Incomplete information about one of the var input");
+        }
         inputVars_attrebutes.push_back(vardeclaration_input);
     }
 
     //Получаем атрибуты подузлов узла OutputVars
-    pugi::xpath_node_set elements_voutput = doc.select_nodes("//OutputVars//*");          
+    pugi::xpath_node_set elements_voutput = doc.select_nodes("//OutputVars//VarDeclaration");
+    if (elements_voutput.empty()){
+        throw std::runtime_error("Var output not found in XML");
+    }           
     for (pugi::xpath_node xpath_node : elements_voutput) {
         pugi::xml_node node = xpath_node.node();
         OutputVars vardeclaration_output; 
@@ -106,41 +131,58 @@ void Parser::get_attributes(){
                 vardeclaration_output.comment = attribut.as_string();                        
             }
         }
+        if (vardeclaration_output.name.empty() || vardeclaration_output.type.empty()){
+            throw std::runtime_error("Incomplete information about one of the var output");
+        }
         outputVars_attrebutes.push_back(vardeclaration_output);
     }
 }
 
-// кол-во событий на вход
+// Кол-во событий на вход
 int Parser::get_count_eventInputs(){
     return eventInputs_attrebutes.size();
 }
 
-// кол-во событий на выход
+// Кол-во событий на выход
 int Parser::get_count_eventOutputs(){
     return eventOutputs_attrebutes.size();
 }
 
-// кол-во данных на вход
+// Кол-во данных на вход
 int Parser::get_count_varsInputs(){
     return inputVars_attrebutes.size();
 }
 
-// кол-во данных на выход
+// Кол-во данных на выход
 int Parser::get_count_varsOutputs(){
     return outputVars_attrebutes.size();
 }
 
-// получаем ФБ
+// Получаем ФБ
 const std::string Parser::get_name_FB(){
     return name_FB;
 }
 
-// кол-во событий на вход, которые связанны с данными
+// Кол-во событий на вход, которые связанны с данными
 int Parser::get_countEvent_InputWith_var(){
     return countEvent_InputWith_var;
 }
 
-// кол-во событий на выход, которые связанны с данными
+// Кол-во событий на выход, которые связанны с данными
 int Parser::get_countEvent_OutputsWith_var(){
     return countEvent_OutputsWith_var;
+}
+
+// Геттеры
+std::vector<EventInputs>  Parser::get_eventInputs_attrebutes(){
+    return eventInputs_attrebutes;
+}
+std::vector<EventOutputs>  Parser::get_eventOutputs_attrebutes(){
+    return eventOutputs_attrebutes;
+}
+std::vector<InputVars> Parser::get_inputVars_attrebutes(){
+    return inputVars_attrebutes;
+}
+std::vector<OutputVars> Parser::get_outputVars_attrebutes(){
+    return outputVars_attrebutes;
 }

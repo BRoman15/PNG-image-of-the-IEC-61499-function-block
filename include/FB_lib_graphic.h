@@ -14,11 +14,10 @@ class BasicFB_image{
     bool saveToPNG(const std::string& filename);
     sf::Color text_color = sf::Color::Black;
     std::unique_ptr<sf::Font> font;
-
+    const int size_square = 10;
+    const int text_size = 20;
 
     public:
-        const int size_square = 10;
-        const int text_size = 20;
         BasicFB_image();
         ~BasicFB_image();
         bool isWindowOpen();
@@ -32,6 +31,7 @@ class BasicFB_image{
         void addTriangle_Green(float x, float y);
         void addTriangle_Blue(float x, float y);
         void addLine(float x, float y, float length);
-        void addLine(float x, float y, float length, const int a);
         void addConnection(float x, float y, float y_var);
+        int get_text_size();
+        int get_size_square();
 };

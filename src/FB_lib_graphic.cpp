@@ -190,24 +190,12 @@ void BasicFB_image::addTriangle_Blue(float x, float y){
     });
 }
 
-// Линии
+// Линия
 void BasicFB_image::addLine(float x, float y, float length){
     addDrawable([=](sf::RenderTarget& target) {
         sf::VertexArray line(sf::Lines, 2);
         line[0].position = sf::Vector2f(x, y);
         line[1].position = sf::Vector2f(x + length, y);
-
-        line[0].color = sf::Color::Black;
-        line[1].color = sf::Color::Black;
-        target.draw(line);
-    });
-}
-
-void BasicFB_image::addLine(float x, float y, float length, const int a){
-    addDrawable([=](sf::RenderTarget& target) {
-        sf::VertexArray line(sf::Lines, 2);
-        line[0].position = sf::Vector2f(x, y);
-        line[1].position = sf::Vector2f(x, y + length);
 
         line[0].color = sf::Color::Black;
         line[1].color = sf::Color::Black;
@@ -254,4 +242,13 @@ void BasicFB_image::addConnection(float x, float y, float y_var){
 
         target.draw(shape1);
     });
+}
+
+// Геттеры
+int BasicFB_image::get_text_size(){
+    return text_size;
+}
+
+int BasicFB_image::get_size_square(){
+    return size_square;
 }

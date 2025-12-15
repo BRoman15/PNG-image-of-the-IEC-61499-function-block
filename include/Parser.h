@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <iomanip>
+#include <stdexcept>
 
 struct EventInputs{
     std::string name;
@@ -25,16 +26,20 @@ class Parser{
     std::string xml_file_address;
     int countEvent_InputWith_var = 0;
     int countEvent_OutputsWith_var = 0;
+    std::string name_FB;
+    std::vector<EventInputs>  eventInputs_attrebutes;
+    std::vector<EventOutputs>  eventOutputs_attrebutes;
+    std::vector<InputVars> inputVars_attrebutes;
+    std::vector<OutputVars> outputVars_attrebutes;
 
     public:
-        std::vector<EventInputs>  eventInputs_attrebutes;
-        std::vector<EventOutputs>  eventOutputs_attrebutes;
-        std::vector<InputVars> inputVars_attrebutes;
-        std::vector<OutputVars> outputVars_attrebutes;
-        std::string name_FB;
-    
         Parser(const std::string& xml_file_address_);
         ~Parser() = default;
+
+        std::vector<EventInputs>  get_eventInputs_attrebutes();
+        std::vector<EventOutputs>  get_eventOutputs_attrebutes();
+        std::vector<InputVars> get_inputVars_attrebutes();
+        std::vector<OutputVars> get_outputVars_attrebutes();
         void get_attributes();
         int get_count_eventInputs();
         int get_count_eventOutputs();
