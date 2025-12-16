@@ -21,6 +21,13 @@ FetchContent_Declare(
     GIT_SHALLOW TRUE
 )
 
+set(SFML_BUILD_AUDIO OFF CACHE BOOL "" FORCE)
+set(SFML_BUILD_NETWORK OFF CACHE BOOL "" FORCE)
+set(SFML_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(SFML_BUILD_DOC OFF CACHE BOOL "" FORCE)
+
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+
 FetchContent_MakeAvailable(pugixml sfml)
 
 include_directories(
