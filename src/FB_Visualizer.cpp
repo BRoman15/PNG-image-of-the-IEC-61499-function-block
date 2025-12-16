@@ -197,7 +197,7 @@ void FB_Visualizer::showWindow(){
     }
 }
 
-// Соединение для удобной работы
+// Соединение
 void FB_Visualizer::show_and_save_FB(const std::string& xmlFilePath){
     try{
         load_from_XML(xmlFilePath);
