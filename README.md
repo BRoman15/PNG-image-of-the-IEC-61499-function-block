@@ -10,38 +10,38 @@
 
 - **Поддержка всех элементов**
 
-- **Стилизация по стандарту**
+- **Стилизация по стандарту IEC 61499**
 
 ## 🏗️ Структура проекта
 ```text
 
-├── CMakeLists.txt⋅⋅
-├── include/⋅⋅
-│   ├── Parser.h⋅⋅
-│   ├── FB_lib_graphic.h⋅⋅
-│   └── FB_Visualizer.h⋅⋅
-├── src/⋅⋅
-│   ├── main.cpp⋅⋅
-│   ├── Parser.cpp⋅⋅
-│   ├── FB_lib_graphic.cpp⋅⋅
-│   └── FB_Visualizer.cpp⋅⋅
-├── test_data_xml/⋅⋅
-│   └── ADD_2.xml⋅⋅
-└── README.md⋅⋅
+├── CMakeLists.txt
+├── include/
+│   ├── Parser.h
+│   ├── FB_lib_graphic.h
+│   └── FB_Visualizer.h
+├── src/
+│   ├── main.cpp
+│   ├── Parser.cpp
+│   ├── FB_lib_graphic.cpp
+│   └── FB_Visualizer.cpp
+├── test_data_xml/
+│   |── ADD_2.xml
+|   └── ......
+└── README.md
 ```
 ## 📦 Зависимости
 Проект автоматически загружает и собирает все зависимости через CMake:
 
-- C++17 или выше⋅⋅
-- SFML 2.6.1⋅⋅
-- pugixml 1.14⋅⋅
+- **C++17** или выше
+- **SFML** 2.6.1
+- **pugixml** 1.14
 
 **Не требуется ручная установка зависимостей!**
 
 ## 🚀 Быстрый старт
-
+### linux
 ```bash
-
 git clone https://github.com/ваш-логин/PNG-image-of-the-IEC-61499-function-block.git
 cd PNG-image-of-the-IEC-61499-function-block
 
@@ -51,12 +51,28 @@ cd build
 
 #Настройте проект с помощью CMake
 cmake ..
-
-#Соберите проект
 make
+
+#Запуск
 cd build
 ./main
+```
+### Windows (MinGW)
+```bash
+git clone https://github.com/ваш-логин/PNG-image-of-the-IEC-61499-function-block.git
+cd PNG-image-of-the-IEC-61499-function-block
 
+#Создайте директорию для сборки
+mkdir build
+cd build
+
+#Настройте проект с помощью CMake
+cmake .. -G "MinGW Makefiles"
+cmake -build .
+
+#Запуск
+cd build
+./main.exe
 ```
 
 ## 👨‍💻 Авторы
@@ -64,5 +80,6 @@ cd build
 - **BRoman15** - *Разработчик* - [Мой GitHub](https://github.com/BRoman15)
 
 ## 🙏 Благодарности
-- (pugixml)[https://github.com/zeux/pugixml.git]
-- (SFML)[https://github.com/SFML/SFML.git]
+- [pugixml](https://github.com/zeux/pugixml.git)
+- [SFML](https://github.com/SFML/SFML.git)
+
