@@ -11,7 +11,7 @@ class FB_Visualizer{
         const int y_size_window = 720;
         void load_from_XML(const std::string& xmlFilePath);
         void rendering_FB();
-        void showWindow();
+        void show_window();
     public:
         FB_Visualizer();
         ~FB_Visualizer() = default;

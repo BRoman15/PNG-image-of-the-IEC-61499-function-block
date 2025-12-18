@@ -24,10 +24,10 @@ void FB_Visualizer::rendering_FB(){
     if (FB->get_name_FB().empty()){
         throw std::runtime_error("File rendering error");
     }
-    image->set_AutoSaveFilename(filename);
+    image->set_filename_for_save(filename);
     
     // Добавление главного контура
-    const int bevelSize = 20;
+    const int bevelSize = 10;
     const int height_inf_line = 30;
     const int vertical_indent = 40;
     const int horizontal_indent = 30;
@@ -194,8 +194,8 @@ void FB_Visualizer::rendering_FB(){
 }
 
 // Показ окна
-void FB_Visualizer::showWindow(){
-    while (image->isWindowOpen()) {
+void FB_Visualizer::show_window(){
+    while (image->is_window_open()){
         image->update();
     }
 }
@@ -205,7 +205,7 @@ void FB_Visualizer::show_and_save_FB(const std::string& xmlFilePath){
     try{
         load_from_XML(xmlFilePath);
         rendering_FB();
-        showWindow();
+        show_window();
     }
     catch(const std::exception& e){
         std::cerr << "Error: " << e.what() << std::endl;

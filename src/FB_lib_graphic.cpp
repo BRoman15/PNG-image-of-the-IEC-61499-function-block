@@ -2,41 +2,38 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "SFML\Graphics.hpp"
 
 BasicFB_image::BasicFB_image(){
     window.create(sf::VideoMode(1280, 720), "Save to PNG", sf::Style::Default);
     renderTexture.create(1280, 720);
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(25);
 
     // Загрузка шрифта
     font = std::make_unique<sf::Font>();
 
-    const char* fontPaths[] = {
+    const char* font_paths[] = {
         "cour.ttf",
         "C:/Windows/Fonts/cour.ttf",
         "C:/Windows/Fonts/courbd.ttf",
         "C:/Windows/Fonts/couri.ttf",
         "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
         "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
-        nullptr
     };
     
-    bool fontLoaded = false;
-    for (int i = 0; fontPaths[i] != nullptr; i++){
-        std::ifstream testFile(fontPaths[i]);
+    bool font_loaded = false;
+    for (const char* fount_path : font_paths){
+        std::ifstream testFile(fount_path);
         if (testFile.good()){
-            if (font->loadFromFile(fontPaths[i])){
-                fontLoaded = true;
+            if (font->loadFromFile(fount_path)){
+                font_loaded = true;
                 break;
             }
             testFile.close();
         }
     }
 
-    // Если шрифт не нашелся, используется стандартный SFML
-    if (!fontLoaded) {
-        std::cerr << "WARNING: Cour font not found. Using default SFML font." << std::endl;
+    if (!font_loaded) {
+        throw std::runtime_error("Cour font not found.");
     }
 }
 
@@ -47,42 +44,39 @@ BasicFB_image::~BasicFB_image() {
 }
 
 // Создание окна
-bool BasicFB_image::saveToPNG(const std::string& image_filename) {
-    return renderTexture.getTexture().copyToImage().saveToFile(image_filename);
+void BasicFB_image::save_to_PNG(const std::string& image_filename) {
+    renderTexture.getTexture().copyToImage().saveToFile(image_filename);
 }
 
 void BasicFB_image::update() {
-    if (!window.isOpen()) return;
+    if (window.isOpen()){
+        window.clear(sf::Color::White);
+        renderTexture.clear(sf::Color::White);
 
-    // Показ окна, сохранение при закрытии
-    sf::Event event;
-    while (window.pollEvent(event)) {
-        if (event.type == sf::Event::Closed) {
-            if (!autoSaveFilename.empty()) {
-                saveToPNG(autoSaveFilename);
+        // Отрисовка всех объектов
+        for (auto& drawFunc : drawables){
+            drawFunc(window);
+            drawFunc(renderTexture);
+        }
+
+        window.display();
+        renderTexture.display();
+
+        sf::Event event;
+        while (window.pollEvent(event)){
+            if (event.type == sf::Event::Closed){
+                save_to_PNG(filename_for_save);
+                window.close();
             }
-            window.close();
         }
     }
-
-    window.clear(sf::Color::White);
-    renderTexture.clear(sf::Color::White);
-    
-    // Отрисовка всех объектов
-    for (auto& drawFunc : drawables) {
-        drawFunc(window);
-        drawFunc(renderTexture);
-    }
-    
-    window.display();
-    renderTexture.display();
 }
 
-void BasicFB_image::set_AutoSaveFilename(const std::string& filename){
-    autoSaveFilename = filename;
+void BasicFB_image::set_filename_for_save(const std::string& filename){
+    filename_for_save = filename;
 }
 
-bool BasicFB_image::isWindowOpen(){
+bool BasicFB_image::is_window_open(){
     return window.isOpen();
 }
 
@@ -92,36 +86,29 @@ void BasicFB_image::addDrawable(std::function<void(sf::RenderTarget&)> drawFunc)
 }
 
 // Контур функционального блока
-void BasicFB_image::addMainContour(float x, float y, float width, float height_event, float height_vars, float bevelSize, float outlineThickness) {
-    addDrawable([=](sf::RenderTarget& target) {
-        // Проверяем и ограничиваем размер фаски
-        float safeBevel = bevelSize / 2;
-        float maxBevel = std::min(width, height_vars) / 2.0f;
-        if (bevelSize > maxBevel) {
-            safeBevel = maxBevel;
-        }
-        
+void BasicFB_image::addMainContour(float x, float y, float width, float height_event, float height_vars, float bevelSize) {
+    addDrawable([=](sf::RenderTarget& target) {        
         sf::ConvexShape shape;
         shape.setPointCount(14);
         
-        shape.setPoint(0, sf::Vector2f(x + width - safeBevel, y));
-        shape.setPoint(1, sf::Vector2f(x + width, y + safeBevel));
-        shape.setPoint(2, sf::Vector2f(x + width, y + height_vars - safeBevel));
-        shape.setPoint(3, sf::Vector2f(x + width - safeBevel, y + height_vars));
-        shape.setPoint(4, sf::Vector2f(x + safeBevel, y + height_vars));
-        shape.setPoint(5, sf::Vector2f(x, y + height_vars - safeBevel));
-        shape.setPoint(6, sf::Vector2f(x, y + safeBevel));
-        shape.setPoint(7, sf::Vector2f(x + safeBevel, y));
-        shape.setPoint(8, sf::Vector2f(x, y - safeBevel));
-        shape.setPoint(9, sf::Vector2f(x, y + safeBevel - height_event));
-        shape.setPoint(10, sf::Vector2f(x + safeBevel, y - height_event));
-        shape.setPoint(11, sf::Vector2f(x - safeBevel + width, y - height_event));
-        shape.setPoint(12, sf::Vector2f(x + width, y - height_event + safeBevel));
-        shape.setPoint(13, sf::Vector2f(x + width, y - safeBevel));
+        shape.setPoint(0, sf::Vector2f(x + width - bevelSize, y));
+        shape.setPoint(1, sf::Vector2f(x + width, y + bevelSize));
+        shape.setPoint(2, sf::Vector2f(x + width, y + height_vars - bevelSize));
+        shape.setPoint(3, sf::Vector2f(x + width - bevelSize, y + height_vars));
+        shape.setPoint(4, sf::Vector2f(x + bevelSize, y + height_vars));
+        shape.setPoint(5, sf::Vector2f(x, y + height_vars - bevelSize));
+        shape.setPoint(6, sf::Vector2f(x, y + bevelSize));
+        shape.setPoint(7, sf::Vector2f(x + bevelSize, y));
+        shape.setPoint(8, sf::Vector2f(x, y - bevelSize));
+        shape.setPoint(9, sf::Vector2f(x, y + bevelSize - height_event));
+        shape.setPoint(10, sf::Vector2f(x + bevelSize, y - height_event));
+        shape.setPoint(11, sf::Vector2f(x - bevelSize + width, y - height_event));
+        shape.setPoint(12, sf::Vector2f(x + width, y - height_event + bevelSize));
+        shape.setPoint(13, sf::Vector2f(x + width, y - bevelSize));
 
         shape.setFillColor(sf::Color::Transparent);
         shape.setOutlineColor(sf::Color::Black);
-        shape.setOutlineThickness(outlineThickness);
+        shape.setOutlineThickness(1);
         
         target.draw(shape);
     });
@@ -161,7 +148,7 @@ void BasicFB_image::addTriangle_Green(float x, float y){
 
         shape.setFillColor(sf::Color::Green);
         shape.setOutlineColor(sf::Color::Black);
-        shape.setOutlineThickness(1.0f);
+        shape.setOutlineThickness(1);
         
         target.draw(shape);
     });
@@ -178,7 +165,7 @@ void BasicFB_image::addTriangle_Blue(float x, float y){
 
         shape.setFillColor(sf::Color::Blue);
         shape.setOutlineColor(sf::Color::Black);
-        shape.setOutlineThickness(1.0f);
+        shape.setOutlineThickness(1);
         
         target.draw(shape);
     });
@@ -210,7 +197,7 @@ void BasicFB_image::addConnection(float x, float y, float y_var){
 
         shape.setFillColor(sf::Color::Transparent);
         shape.setOutlineColor(sf::Color::Black);
-        shape.setOutlineThickness(1.0f);
+        shape.setOutlineThickness(1);
         
         target.draw(shape);
 
@@ -232,7 +219,7 @@ void BasicFB_image::addConnection(float x, float y, float y_var){
 
         shape1.setFillColor(sf::Color::Transparent);
         shape1.setOutlineColor(sf::Color::Black);
-        shape1.setOutlineThickness(1.0f);
+        shape1.setOutlineThickness(1);
 
         target.draw(shape1);
     });

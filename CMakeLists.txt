@@ -25,13 +25,13 @@ set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable(pugixml sfml)
 
-include_directories(
+add_executable(main src/main.cpp src/Parser.cpp src/FB_lib_graphic.cpp src/FB_Visualizer.cpp)
+
+target_include_directories(main PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${pugixml_SOURCE_DIR}/src
     ${sfml_SOURCE_DIR}/include
 )
-
-add_executable(main src/main.cpp src/Parser.cpp src/FB_lib_graphic.cpp src/FB_Visualizer.cpp)
 
 target_link_libraries(main PRIVATE
     sfml-graphics
@@ -39,14 +39,3 @@ target_link_libraries(main PRIVATE
     sfml-system
     pugixml-static
 )
-
-# Добавляем include-директории
-target_include_directories(main PRIVATE
-    ${pugixml_SOURCE_DIR}/src
-)
-
-# Для Windows: флаг для консольного приложения
-if(WIN32)
-    target_link_options(main PRIVATE -mconsole)
-    message(STATUS "Building console application with SFML and pugixml")
-endif()

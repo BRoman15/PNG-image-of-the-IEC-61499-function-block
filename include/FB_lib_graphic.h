@@ -10,8 +10,7 @@ class BasicFB_image{
     sf::RenderWindow window;
     sf::RenderTexture renderTexture;
     std::vector<std::function<void(sf::RenderTarget&)>> drawables;
-    std::string autoSaveFilename;
-    bool saveToPNG(const std::string& filename);
+    std::string filename_for_save;
     sf::Color text_color = sf::Color::Black;
     std::unique_ptr<sf::Font> font;
     const int size_square = 10;
@@ -20,12 +19,12 @@ class BasicFB_image{
     public:
         BasicFB_image();
         ~BasicFB_image();
-        bool isWindowOpen();
+        bool is_window_open();
+        void save_to_PNG(const std::string& filename);
         void update();
-        void set_AutoSaveFilename(const std::string& filename);
-        void close();
+        void set_filename_for_save(const std::string& filename);
         void addDrawable(std::function<void(sf::RenderTarget&)> drawFunc);
-        void addMainContour(float x, float y, float width, float height_event, float height_vars, float bevelSize, float outlineThickness = 1.0f);
+        void addMainContour(float x, float y, float width, float height_event, float height_vars, float bevelSize);
         void addText(const std::string& text, float x, float y);
         float get_width_text(const std::string& text);
         void addTriangle_Green(float x, float y);

@@ -2,6 +2,7 @@
 #include <vector>
 #include <iomanip>
 #include <stdexcept>
+#include "pugixml.hpp"
 
 struct EventInputs{
     std::string name;
