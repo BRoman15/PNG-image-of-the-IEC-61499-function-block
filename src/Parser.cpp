@@ -157,7 +157,7 @@ int Parser::get_count_varsOutputs(){
     return outputVars_attributes.size();
 }
 
-// Получаем ФБ
+// Имя ФБ
 const std::string Parser::get_name_FB(){
     return name_FB;
 }

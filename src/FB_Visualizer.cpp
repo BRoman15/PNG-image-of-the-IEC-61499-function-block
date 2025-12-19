@@ -47,8 +47,8 @@ void FB_Visualizer::rendering_FB(){
 
     // Название
     image ->add_text(FB->get_name_FB(),
-        x_FB + trunc(width_FB/2) - trunc(image->get_width_text(FB->get_name_FB())/2),
-        y_FB - trunc((image->get_text_size())+10)/2);
+        x_FB + trunc(width_FB/2) - trunc(image->get_width_text(FB->get_name_FB()) / 2),
+        y_FB - trunc((image->get_text_size())+10) / 2);
     
     // добавление var input
     int top_margin = 25;
@@ -78,7 +78,7 @@ void FB_Visualizer::rendering_FB(){
             x_FB - (10 + image->get_size_square() * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) - image->get_width_text(event.type) -50 - image->get_width_text(event.comment),
             y_FB + top_margin - 5);
         var_for_connection[event.name] = y_FB + top_margin + image->get_text_size()/2;
-        top_margin += 30;
+        top_margin += height_inf_line;
     }
 
     // добавление var output
@@ -109,7 +109,7 @@ void FB_Visualizer::rendering_FB(){
             y_FB + top_margin - 5);
         
         var_for_connection[event.name] = y_FB + top_margin + image->get_text_size()/2;
-        top_margin += 30;
+        top_margin += height_inf_line;
     }
 
     image->update();
@@ -148,7 +148,7 @@ void FB_Visualizer::rendering_FB(){
         image->add_text(event.comment,
             x_FB - (10 + image->get_size_square() * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) - image->get_width_text(event.type) -50 - image->get_width_text(event.comment),
             y_FB - height_event + top_margin - 5);
-        top_margin += 30;
+        top_margin += height_inf_line;
     }
  
     // добавление event outputs
@@ -189,7 +189,7 @@ void FB_Visualizer::rendering_FB(){
         image->add_text(event.comment,
             x_FB + width_FB + (10 + image->get_size_square() * FB->get_countEvent_OutputsWith_var() + 5 + extra_length_connection) + image->get_width_text(event.type) + 45,
             y_FB - height_event + top_margin - 5);
-        top_margin += 30;
+        top_margin += height_inf_line;
     }
 }
 

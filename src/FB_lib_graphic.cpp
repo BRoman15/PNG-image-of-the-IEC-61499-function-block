@@ -126,9 +126,6 @@ void BasicFB_image::add_text(const std::string& text, float x, float y) {
 
 // Получачем длинну строки в прикселях
 float BasicFB_image::get_width_text(const std::string& text_){
-    if (!font || font->getInfo().family.empty()) {
-        return text_.length() * 12;  //Примерное значение
-    }
     sf::Text text(text_, *font, 20);
     sf::FloatRect bounds = text.getLocalBounds();
     float width = bounds.width;
@@ -143,7 +140,7 @@ void BasicFB_image::add_triangle_Green(float x, float y){
         shape.setPointCount(3);
 
         shape.setPoint(0, sf::Vector2f(x, y));
-        shape.setPoint(1, sf::Vector2f(x + (text_size * 0.5), y + text_size/2));
+        shape.setPoint(1, sf::Vector2f(x + (text_size/2), y + text_size/2));
         shape.setPoint(2, sf::Vector2f(x, y + text_size));
 
         shape.setFillColor(sf::Color::Green);
@@ -160,13 +157,12 @@ void BasicFB_image::add_triangle_Blue(float x, float y){
         shape.setPointCount(3);
 
         shape.setPoint(0, sf::Vector2f(x, y));
-        shape.setPoint(1, sf::Vector2f(x + (text_size * 0.5), y + text_size/2));
+        shape.setPoint(1, sf::Vector2f(x + (text_size/2), y + text_size/2));
         shape.setPoint(2, sf::Vector2f(x, y + text_size));
 
         shape.setFillColor(sf::Color::Blue);
         shape.setOutlineColor(sf::Color::Black);
         shape.setOutlineThickness(1);
-        
         target.draw(shape);
     });
 }
@@ -198,7 +194,6 @@ void BasicFB_image::add_connection(float x, float y, float y_var){
         shape.setFillColor(sf::Color::Transparent);
         shape.setOutlineColor(sf::Color::Black);
         shape.setOutlineThickness(1);
-        
         target.draw(shape);
 
         sf::VertexArray line(sf::Lines, 2);
@@ -220,7 +215,6 @@ void BasicFB_image::add_connection(float x, float y, float y_var){
         shape1.setFillColor(sf::Color::Transparent);
         shape1.setOutlineColor(sf::Color::Black);
         shape1.setOutlineThickness(1);
-
         target.draw(shape1);
     });
 }

@@ -5,7 +5,6 @@
 #include <iomanip>
 
 class BasicFB_image{
-    int cout_event_inputoutput;
     bool isOpen;
     sf::RenderWindow window;
     sf::RenderTexture renderTexture;
