@@ -53,7 +53,7 @@ void Parser::get_attributes(){
         if (event_input.name.empty() || event_input.type.empty()){
             throw std::runtime_error("Incomplete information about one of the event inputs");
         }
-        eventInputs_attrebutes.push_back(event_input);
+        eventInputs_attributes.push_back(event_input);
     }
 
     //Получаем атрибуты подузлов узла EventOutput
@@ -83,7 +83,7 @@ void Parser::get_attributes(){
         if (event_output.name.empty() || event_output.type.empty()){
             throw std::runtime_error("Incomplete information about one of the event outputs");
         }
-        eventOutputs_attrebutes.push_back(event_output);
+        eventOutputs_attributes.push_back(event_output);
     }
 
     //Получаем атрибуты подузлов узла InputVars
@@ -108,7 +108,7 @@ void Parser::get_attributes(){
         if (vardeclaration_input.name.empty() || vardeclaration_input.type.empty()){
             throw std::runtime_error("Incomplete information about one of the var input");
         }
-        inputVars_attrebutes.push_back(vardeclaration_input);
+        inputVars_attributes.push_back(vardeclaration_input);
     }
 
     //Получаем атрибуты подузлов узла OutputVars
@@ -133,28 +133,28 @@ void Parser::get_attributes(){
         if (vardeclaration_output.name.empty() || vardeclaration_output.type.empty()){
             throw std::runtime_error("Incomplete information about one of the var output");
         }
-        outputVars_attrebutes.push_back(vardeclaration_output);
+        outputVars_attributes.push_back(vardeclaration_output);
     }
 }
 
 // Кол-во событий на вход
 int Parser::get_count_eventInputs(){
-    return eventInputs_attrebutes.size();
+    return eventInputs_attributes.size();
 }
 
 // Кол-во событий на выход
 int Parser::get_count_eventOutputs(){
-    return eventOutputs_attrebutes.size();
+    return eventOutputs_attributes.size();
 }
 
 // Кол-во данных на вход
 int Parser::get_count_varsInputs(){
-    return inputVars_attrebutes.size();
+    return inputVars_attributes.size();
 }
 
 // Кол-во данных на выход
 int Parser::get_count_varsOutputs(){
-    return outputVars_attrebutes.size();
+    return outputVars_attributes.size();
 }
 
 // Получаем ФБ
@@ -173,15 +173,15 @@ int Parser::get_countEvent_OutputsWith_var(){
 }
 
 // Геттеры
-std::vector<EventInputs>  Parser::get_eventInputs_attrebutes(){
-    return eventInputs_attrebutes;
+std::vector<EventInputs>  Parser::get_eventInputs_attributes(){
+    return eventInputs_attributes;
 }
-std::vector<EventOutputs>  Parser::get_eventOutputs_attrebutes(){
-    return eventOutputs_attrebutes;
+std::vector<EventOutputs>  Parser::get_eventOutputs_attributes(){
+    return eventOutputs_attributes;
 }
-std::vector<InputVars> Parser::get_inputVars_attrebutes(){
-    return inputVars_attrebutes;
+std::vector<InputVars> Parser::get_inputVars_attributes(){
+    return inputVars_attributes;
 }
-std::vector<OutputVars> Parser::get_outputVars_attrebutes(){
-    return outputVars_attrebutes;
+std::vector<OutputVars> Parser::get_outputVars_attributes(){
+    return outputVars_attributes;
 }

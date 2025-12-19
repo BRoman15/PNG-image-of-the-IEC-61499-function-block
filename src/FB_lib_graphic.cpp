@@ -22,13 +22,13 @@ BasicFB_image::BasicFB_image(){
     
     bool font_loaded = false;
     for (const char* fount_path : font_paths){
-        std::ifstream testFile(fount_path);
-        if (testFile.good()){
+        std::ifstream test_file(fount_path);
+        if (test_file.good()){
             if (font->loadFromFile(fount_path)){
                 font_loaded = true;
                 break;
             }
-            testFile.close();
+            test_file.close();
         }
     }
 
@@ -81,13 +81,13 @@ bool BasicFB_image::is_window_open(){
 }
 
 // Добавление объектов
-void BasicFB_image::addDrawable(std::function<void(sf::RenderTarget&)> drawFunc) {
+void BasicFB_image::add_drawable(std::function<void(sf::RenderTarget&)> drawFunc) {
     drawables.push_back(drawFunc);
 }
 
 // Контур функционального блока
-void BasicFB_image::addMainContour(float x, float y, float width, float height_event, float height_vars, float bevelSize) {
-    addDrawable([=](sf::RenderTarget& target) {        
+void BasicFB_image::add_main_contour(float x, float y, float width, float height_event, float height_vars, float bevelSize) {
+    add_drawable([=](sf::RenderTarget& target) {        
         sf::ConvexShape shape;
         shape.setPointCount(14);
         
@@ -115,7 +115,7 @@ void BasicFB_image::addMainContour(float x, float y, float width, float height_e
 }
 
 // Текст
-void BasicFB_image::addText(const std::string& text, float x, float y) {
+void BasicFB_image::add_text(const std::string& text, float x, float y) {
     drawables.push_back([this, text, x, y](sf::RenderTarget& target) {
         sf::Text textObj(text, *font, text_size);
         textObj.setPosition(x, y);
@@ -136,9 +136,9 @@ float BasicFB_image::get_width_text(const std::string& text_){
 }
 
 // Треугольник
-void BasicFB_image::addTriangle_Green(float x, float y){
+void BasicFB_image::add_triangle_Green(float x, float y){
 
-        addDrawable([=](sf::RenderTarget& target) {
+        add_drawable([=](sf::RenderTarget& target) {
         sf::ConvexShape shape;
         shape.setPointCount(3);
 
@@ -154,8 +154,8 @@ void BasicFB_image::addTriangle_Green(float x, float y){
     });
 }
 
-void BasicFB_image::addTriangle_Blue(float x, float y){
-        addDrawable([=](sf::RenderTarget& target) {
+void BasicFB_image::add_triangle_Blue(float x, float y){
+        add_drawable([=](sf::RenderTarget& target) {
         sf::ConvexShape shape;
         shape.setPointCount(3);
 
@@ -172,8 +172,8 @@ void BasicFB_image::addTriangle_Blue(float x, float y){
 }
 
 // Линия
-void BasicFB_image::addLine(float x, float y, float length){
-    addDrawable([=](sf::RenderTarget& target) {
+void BasicFB_image::add_line(float x, float y, float length){
+    add_drawable([=](sf::RenderTarget& target) {
         sf::VertexArray line(sf::Lines, 2);
         line[0].position = sf::Vector2f(x, y);
         line[1].position = sf::Vector2f(x + length, y);
@@ -185,8 +185,8 @@ void BasicFB_image::addLine(float x, float y, float length){
 }
 
 // Соединение event-var
-void BasicFB_image::addConnection(float x, float y, float y_var){
-    addDrawable([=](sf::RenderTarget& target) {
+void BasicFB_image::add_connection(float x, float y, float y_var){
+    add_drawable([=](sf::RenderTarget& target) {
         sf::ConvexShape shape;
         shape.setPointCount(4);
 

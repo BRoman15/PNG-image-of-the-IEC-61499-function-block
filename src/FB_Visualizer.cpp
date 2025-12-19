@@ -43,10 +43,10 @@ void FB_Visualizer::rendering_FB(){
         width_FB = 150;
     }
 
-    image -> addMainContour(x_FB, y_FB, width_FB, height_event, height_var, bevelSize);
+    image -> add_main_contour(x_FB, y_FB, width_FB, height_event, height_var, bevelSize);
 
     // Название
-    image ->addText(FB->get_name_FB(),
+    image ->add_text(FB->get_name_FB(),
         x_FB + trunc(width_FB/2) - trunc(image->get_width_text(FB->get_name_FB())/2),
         y_FB - trunc((image->get_text_size())+10)/2);
     
@@ -54,27 +54,27 @@ void FB_Visualizer::rendering_FB(){
     int top_margin = 25;
     int extra_length_connection = FB->get_countEvent_InputWith_var()*5;
     std::map<std::string, float> var_for_connection;
-    for (InputVars event : FB->get_inputVars_attrebutes()){
-        image->addTriangle_Blue(x_FB, y_FB + top_margin);
-        image->addText(event.name,
+    for (InputVars event : FB->get_inputVars_attributes()){
+        image->add_triangle_Blue(x_FB, y_FB + top_margin);
+        image->add_text(event.name,
             x_FB + image->get_text_size() / 2 + 5,
             y_FB + top_margin - 5);
-        image->addLine(x_FB,
+        image->add_line(x_FB,
             y_FB + top_margin + image->get_text_size()/2,
             -(10 + image->get_size_square() * FB->get_countEvent_InputWith_var() + 10 + extra_length_connection));
 
-        image->addText(event.type,
+        image->add_text(event.type,
             x_FB - (10 + image->get_size_square() * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) - image->get_width_text(event.type) -15,
             y_FB + top_margin - 5);
 
-        if (event.comment.empty() == false){
-            image->addLine(
+        if (!event.comment.empty()){
+            image->add_line(
                 x_FB - (10 + image->get_size_square() * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) - image->get_width_text(event.type) -35,
                 y_FB + top_margin + image->get_text_size()/2,
                 5);
         }
         
-        image->addText(event.comment,
+        image->add_text(event.comment,
             x_FB - (10 + image->get_size_square() * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) - image->get_width_text(event.type) -50 - image->get_width_text(event.comment),
             y_FB + top_margin - 5);
         var_for_connection[event.name] = y_FB + top_margin + image->get_text_size()/2;
@@ -84,27 +84,27 @@ void FB_Visualizer::rendering_FB(){
     // добавление var output
     top_margin = 25;
     extra_length_connection = FB->get_countEvent_OutputsWith_var()*5;
-    for (OutputVars event : FB->get_outputVars_attrebutes()){
-        image->addTriangle_Blue(x_FB + width_FB - image->get_text_size()/2, y_FB + top_margin);
-        image->addText(event.name,
+    for (OutputVars event : FB->get_outputVars_attributes()){
+        image->add_triangle_Blue(x_FB + width_FB - image->get_text_size()/2, y_FB + top_margin);
+        image->add_text(event.name,
             x_FB + width_FB - image->get_width_text(event.name) - image->get_text_size()/2 - 10,
             y_FB + top_margin - 5);
-        image->addLine(x_FB + width_FB,
+        image->add_line(x_FB + width_FB,
             y_FB + top_margin + image->get_text_size()/2,
             10 + image->get_size_square() * FB->get_countEvent_OutputsWith_var() + 10 + extra_length_connection);
 
-        image->addText(event.type,
+        image->add_text(event.type,
             x_FB + width_FB + (10 + image->get_size_square() * FB->get_countEvent_OutputsWith_var() + 5 + extra_length_connection) +15,
             y_FB + top_margin - 5);
 
-        if (event.comment.empty() == false){
-            image->addLine(
+        if (!event.comment.empty()){
+            image->add_line(
                 x_FB + width_FB + (10 + image->get_size_square() * FB->get_countEvent_OutputsWith_var() + 5 + extra_length_connection) + image->get_width_text(event.type) + 30,
                 y_FB + top_margin + image->get_text_size()/2,
                 5);
         }
 
-        image->addText(event.comment,
+        image->add_text(event.comment,
             x_FB + width_FB + (10 + image->get_size_square() * FB->get_countEvent_OutputsWith_var() + 5 + extra_length_connection) + image->get_width_text(event.type) + 45,
             y_FB + top_margin - 5);
         
@@ -118,34 +118,34 @@ void FB_Visualizer::rendering_FB(){
     top_margin = 25;
     int coefficient_order_connections = 0;
     extra_length_connection = FB->get_countEvent_InputWith_var()*5;
-    for (EventInputs event : FB->get_eventInputs_attrebutes()){
-        image->addTriangle_Green(x_FB, y_FB - height_event + top_margin);
-        image->addText(event.name, x_FB + image->get_text_size() / 2 + 5, y_FB - height_event + top_margin - 5);
-        image->addLine(x_FB,
+    for (EventInputs event : FB->get_eventInputs_attributes()){
+        image->add_triangle_Green(x_FB, y_FB - height_event + top_margin);
+        image->add_text(event.name, x_FB + image->get_text_size() / 2 + 5, y_FB - height_event + top_margin - 5);
+        image->add_line(x_FB,
             y_FB - height_event + top_margin + image->get_text_size()/2,
             -(10 + image->get_size_square() * FB->get_countEvent_InputWith_var() + 10 + extra_length_connection));
-        if (event.vars.empty() == false){
+        if (!event.vars.empty()){
             for (std::string var : event.vars){
                 if (var_for_connection[var] != 0){
-                    image->addConnection(x_FB - 10 - image->get_size_square() - coefficient_order_connections,
+                    image->add_connection(x_FB - 10 - image->get_size_square() - coefficient_order_connections,
                         y_FB - height_event + top_margin + image->get_text_size()/2,
                         var_for_connection[var] - (y_FB - height_event + top_margin + image->get_text_size()/2));
                 }
             }
             coefficient_order_connections += 15;
         }
-        image->addText(event.type,
+        image->add_text(event.type,
             x_FB - (10 + image->get_size_square() * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) - image->get_width_text(event.type) -15,
             y_FB - height_event + top_margin - 5);
         
-        if (event.comment.empty() == false){
-            image->addLine(
+        if (!event.comment.empty()){
+            image->add_line(
                 x_FB - (10 + image->get_size_square() * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) - image->get_width_text(event.type) -35,
                 y_FB - height_event + top_margin + image->get_text_size()/2,
                 5);
         }
 
-        image->addText(event.comment,
+        image->add_text(event.comment,
             x_FB - (10 + image->get_size_square() * FB->get_countEvent_InputWith_var() + 5 + extra_length_connection) - image->get_width_text(event.type) -50 - image->get_width_text(event.comment),
             y_FB - height_event + top_margin - 5);
         top_margin += 30;
@@ -155,38 +155,38 @@ void FB_Visualizer::rendering_FB(){
     top_margin = 25;
     coefficient_order_connections = 0;
     extra_length_connection = FB->get_countEvent_OutputsWith_var()*5;
-    for (EventOutputs event : FB->get_eventOutputs_attrebutes()){
-        image->addTriangle_Green(x_FB + width_FB - image->get_text_size()/2, y_FB - height_event + top_margin);
-        image->addText(event.name,
+    for (EventOutputs event : FB->get_eventOutputs_attributes()){
+        image->add_triangle_Green(x_FB + width_FB - image->get_text_size()/2, y_FB - height_event + top_margin);
+        image->add_text(event.name,
             x_FB + width_FB - image->get_width_text(event.name) - image->get_text_size()/2 - 10,
             y_FB - height_event + top_margin - 5);
 
-        image->addLine(x_FB + width_FB,
+        image->add_line(x_FB + width_FB,
             y_FB - height_event + top_margin + image->get_text_size()/2,
             10 + image->get_size_square() * FB->get_countEvent_OutputsWith_var() + 10 + extra_length_connection);
 
-        if (event.vars.empty() == false){
+        if (!event.vars.empty()){
             for (std::string var : event.vars){
                 if (var_for_connection[var] != 0){
-                image->addConnection(x_FB + width_FB + 10 + image->get_size_square() + coefficient_order_connections,
+                image->add_connection(x_FB + width_FB + 10 + image->get_size_square() + coefficient_order_connections,
                     y_FB - height_event + top_margin + image->get_text_size()/2,
                     var_for_connection[var] - (y_FB - height_event + top_margin + image->get_text_size()/2));
                 }
             }
             coefficient_order_connections += 15;
         }
-        image->addText(event.type,
+        image->add_text(event.type,
             x_FB + width_FB + (10 + image->get_size_square() * FB->get_countEvent_OutputsWith_var() + 5 + extra_length_connection) +15,
             y_FB - height_event + top_margin - 5);
 
-        if (event.comment.empty() == false){
-            image->addLine(
+        if (!event.comment.empty()){
+            image->add_line(
                 x_FB + width_FB + (10 + image->get_size_square() * FB->get_countEvent_OutputsWith_var() + 5 + extra_length_connection) + image->get_width_text(event.type) + 30,
                 y_FB - height_event + top_margin + image->get_text_size()/2,
                 5);
         }
 
-        image->addText(event.comment,
+        image->add_text(event.comment,
             x_FB + width_FB + (10 + image->get_size_square() * FB->get_countEvent_OutputsWith_var() + 5 + extra_length_connection) + image->get_width_text(event.type) + 45,
             y_FB - height_event + top_margin - 5);
         top_margin += 30;

@@ -47,7 +47,7 @@
 ## 🚀 Быстрый старт
 ### Linux
 ```bash
-git clone https://github.com/ваш-логин/PNG-image-of-the-IEC-61499-function-block.git
+git clone https://github.com/BRoman15/PNG-image-of-the-IEC-61499-function-block.git
 cd PNG-image-of-the-IEC-61499-function-block
 
 #Создайте директорию для сборки
@@ -64,7 +64,7 @@ cd build
 ```
 ### Windows (MinGW)
 ```bash
-git clone https://github.com/ваш-логин/PNG-image-of-the-IEC-61499-function-block.git
+git clone https://github.com/BRoman15/PNG-image-of-the-IEC-61499-function-block.git
 cd PNG-image-of-the-IEC-61499-function-block
 
 #Создайте директорию для сборки
